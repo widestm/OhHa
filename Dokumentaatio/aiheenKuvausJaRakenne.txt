@@ -1,0 +1,16 @@
+Kuvan tai nappuloiden/numeroiden järjestämispeli
+
+Aihe: Toteutetaan peli jossa yksi pelaaja yrittää saada kuvaa alkuperäiseen muotoon tai järjestää nappuloissa olevat numerot suuruusjärjestykseen. Pelille tulee jonkunlainen graafinen käyttöliittymä
+
+Peli : 
+
+Peli luo pelilaudan jonka jokaisessa ruudussa lukuunottamatta yhtä on nappula jota klikkaamalla se siirtyy seuraavaan. Pelin tarkoituksena on järjestää nappulat oikein siten että kuva tai numerot ovat järjestyksessä.
+
+Ominaisuuksia: 
+
+- Laudan koon määrittäminen vapaasti
+- Laudalla olevien nappuloiden määrään määrittäminen vapaasti
+- Pelaaja voi itse valita kuvan tietokoneeltaan tai valmiina pelissä olevista kuvista jonkun.
+- Peliä voi myös pelata numeroilla tai jollain symboleilla(?) jolloin ne pitää asettaa järkevään järjestykseen
+- Peli ylläpitää highscore-listaa jossa lasketaan vähimmillä siirroilla pärjänneet pelaajat. Listoja on eri riippuen siitä kuinka monta nappulaa pelissä on ollut käytössä.
+- Peli voisi myös ottaa aikaa ja tehdä ajoista oma highscore lista tai lisätä ajan aikaisempiin listhoihin.
