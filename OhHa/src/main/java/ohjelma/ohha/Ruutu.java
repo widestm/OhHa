@@ -8,8 +8,10 @@ package ohjelma.ohha;
 public class Ruutu {
     private int xKoord;
     private int yKoord;
+    private int numero;
 
-    public Ruutu() {
+    public Ruutu(int numero) {
+        this.numero=numero;
     }
 
     public int getxKoord() {
