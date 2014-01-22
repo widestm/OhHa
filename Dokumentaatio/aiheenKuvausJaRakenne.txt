@@ -14,3 +14,5 @@ Ominaisuuksia:
 - Peliä voi myös pelata numeroilla tai jollain symboleilla(?) jolloin ne pitää asettaa järkevään järjestykseen
 - Peli ylläpitää highscore-listaa jossa lasketaan vähimmillä siirroilla pärjänneet pelaajat. Listoja on eri riippuen siitä kuinka monta nappulaa pelissä on ollut käytössä.
 - Peli voisi myös ottaa aikaa ja tehdä ajoista oma highscore lista tai lisätä ajan aikaisempiin listhoihin.
+
+
