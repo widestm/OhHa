@@ -1,10 +1,10 @@
 package ohjelma.ohha;
 
-public class App {
+public class Puzzle {
 
     public static void main(String[] args) {
-        Ruudukko2 test= new Ruudukko2();
-        test.tayta();
+        Ruudukko test = new Ruudukko(4, 3, 0, 2);
+        test.taytaRuudukko();
         test.tulosta();
         test.asetaTyhja();
         test.tulosta();
