@@ -22,6 +22,6 @@ public class Puzzle {
         test.tulosta();
         test.siirto(3, 0);
         test.tulosta();
-        
+
     }
 }
