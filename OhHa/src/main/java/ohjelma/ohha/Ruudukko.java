@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class Ruudukko {
 
-    Ruutu[][] ruudukko;
+    private int[][] ruudukko;
     private int korkeus;
     private int leveys;
     private int ruutujenLkm;
@@ -16,27 +16,26 @@ public class Ruudukko {
 
     public Ruudukko(int korkeus, int leveys, int ruutuja) {
         this.random = new Random();
-        this.ruudukko = new Ruutu[korkeus][leveys];
-        this.korkeus=korkeus;
-        this.leveys=leveys;
-        this.ruutujenLkm=ruutuja;
-        
+        this.korkeus = korkeus;
+        this.leveys = leveys;
+        this.ruutujenLkm = ruutuja;
+
     }
 
-    public Ruutu[][] getRuudukko() {
+    public int[][] getRuudukko() {
         return ruudukko;
     }
 
-    
-    
-    public void taytaRuudukko(){
-        int tyhjaRuutu= random.nextInt(ruutujenLkm);
+    public void taytaRuudukko() {
+//        ruudukko = new int[][]{
+//            
+//            {0, 1, 2},
+//            {3, 4, 5},
+//            {6, 7, 8},
+//            {9, 10, 11}
+//        };
         
-        for (int i = 0; i < korkeus-1; i++) {
-            for (int j = 0; j < leveys-1; j++) {
-                
-            }
-            
-        }
+        
     }
+
 }
