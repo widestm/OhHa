@@ -7,3 +7,4 @@ Ohha harjoitustyö tuntidokumentaatio
 20.1.2014 : 0,5h Hieman suunnittelua lisää
 
 23.1.2014 : 2h Koodin rakenteen suunnittelua ja hieman siirto- ja taulun luontilogiikkaa lisätty
+23.1.2014 : 1h pari testiä ja luokkakaaviot
