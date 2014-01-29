@@ -1,6 +1,5 @@
 package ohjelma.ohha;
 
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,35 +58,35 @@ public class RuudukkoTest {
 
     @Test
     public void ruudunTayttaminenOikein() {
+        int n = 0;
         test.taytaRuudukko();
-        for (int i = 0; i < test.getKorkeus() - 1; i++) {
-            for (int j = 0; j < test.getLeveys() - 1; j++) {
-                assertEquals(test.getRuudukko()[i][j], 1);
+        for (int i = 0; i < test.getKorkeus(); i++) {
+            for (int j = 0; j < test.getLeveys(); j++) {
+                assertEquals(test.getRuudukko()[i][j].getJNro(), n);
+                n++;
             }
         }
     }
 
     @Test
     public void tulostusOikein() {
-        String odotettu = 
-                    "111\n"+
-                    "111\n"+
-                    "111\n"+
-                    "111\n"
-                ;
+        String odotettu
+                = "0 1 2 \n"
+                + "3 4 5 \n"
+                + "6 7 8 \n"
+                + "9 10 11 \n";
         assertEquals(odotettu, test.toString());
     }
-    @Test
-    public void tyhjaMeneeOikeaanPaikkaan(){
-        test.asetaTyhja();
-        assertEquals(test.getRuudukko()[0][2], 0);
-    }
-    @Test
-    public void tyhjanSiirtaminenToimii(){
-        test.asetaTyhja();
-        test.asetaTyhja(2, 2);
-        assertEquals(test.getRuudukko()[0][2], 0);
-    }
-    
-    
+//    @Test
+//    public void tyhjaMeneeOikeaanPaikkaan(){
+//        test.asetaTyhja();
+//        assertEquals(test.getRuudukko()[0][2], 0);
+//    }
+//    @Test
+//    public void tyhjanSiirtaminenToimii(){
+//        test.asetaTyhja();
+//        test.asetaTyhja(2, 2);
+//        assertEquals(test.getRuudukko()[0][2], 0);
+//    }
+
 }

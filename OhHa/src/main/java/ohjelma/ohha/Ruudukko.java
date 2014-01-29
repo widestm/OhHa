@@ -61,7 +61,7 @@ public class Ruudukko {
         String tulostus = "";
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                tulostus += ruudukko[i][j].getSisalto() ? " + " + ruudukko[i][j].getJNro() : " - " + ruudukko[i][j].getJNro();
+                tulostus += ruudukko[i][j].getJNro() +" ";
             }
             tulostus += "\n";
         }
