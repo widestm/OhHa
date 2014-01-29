@@ -5,23 +5,23 @@ public class Puzzle {
     public static void main(String[] args) {
         Ruudukko test = new Ruudukko(4, 3, 0, 2);
         test.taytaRuudukko();
-        test.toString();
+        System.out.println(test.toString());
         test.asetaTyhja();
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(0, 1);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(0, 2);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(1, 2);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(1, 1);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(1, 0);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(2, 0);
-        test.toString();
+        System.out.println(test.toString());
         test.siirto(3, 0);
-        test.toString();
+       System.out.println(test.toString());
 
     }
 }
