@@ -46,7 +46,7 @@ public class Ruudukko {
     }
 
     public void taytaRuudukko() {
-        int n = 0;
+        int n = 1;
         ruudukko = new Ruutu[korkeus][leveys];
         for (int sarake = 0; sarake < korkeus; sarake++) {
             for (int rivi = 0; rivi < leveys; rivi++) {
@@ -61,7 +61,7 @@ public class Ruudukko {
         String tulostus = "";
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                tulostus += ruudukko[i][j].getJNro() +" ";
+                tulostus += ruudukko[i][j].getJNro() + " ";
             }
             tulostus += "\n";
         }
@@ -69,7 +69,20 @@ public class Ruudukko {
     }
 
     public void asetaTyhja(int rivi, int sarake) {
-        ruudukko[rivi][sarake].setSisalto(false);
+        Ruutu temp = ruudukko[rivi][sarake];
+        for (int i = 0; i < ruudukko.length; i++) {
+            for (int j = 0; j < ruudukko.length; j++) {
+                if (ruudukko[i][j].getJNro()==16) {
+                    ruudukko[rivi][sarake]=ruudukko[i][j];
+                    ruudukko
+                }
+            }
+            
+        }
+        
+        
+        
+        ruudukko[rivi][sarake]=
     }
 
     public void asetaTyhja() {
@@ -90,15 +103,25 @@ public class Ruudukko {
 
     public boolean onkoRatkaistavissa() {
         int inversioita = 0;
-
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko.length; j++) {
-                for (int k = 0; k < ruudukko[0].length; k++) {
-                    for (int l = 0; l < ruudukko[0].length; l++) {
-                        if (i < j || k < l && ruudukko[i][k].getJNro()< ruudukko[j][l].getJNro() && ruudukko[i][k].getJNro()!=0 && ruudukko[j][l].getJNro()!=0 ) {
-                            inversioita++;
-                        }
-
+        int x = 0;
+        int y = 0;
+        int verrattava;
+        while (true) {
+            System.out.println("verrattava: " + y + ", " + x);
+            verrattava = ruudukko[y][x].getJNro();
+            x++;
+            if (x > ruudukko[0].length-1) {
+                y++;
+                if (y > ruudukko.length-1) {
+                    break;
+                }
+                x = 0;
+            }
+            System.out.println("aloitusruutu: " + y + ", " + x);
+            for (int i = y; i < ruudukko.length; i++) {
+                for (int j = x; j < ruudukko[0].length; j++) {
+                    if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro()!=16 &&verrattava!=16) {
+                        inversioita++;
                     }
 
                 }

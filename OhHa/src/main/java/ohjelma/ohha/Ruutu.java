@@ -26,6 +26,10 @@ public class Ruutu {
         return yKoord;
     }
 
+    public void setjNro(int jNro) {
+        this.jNro = jNro;
+    }
+
     public void setxKoord(int xKoord) {
         this.xKoord = xKoord;
     }
