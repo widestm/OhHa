@@ -53,7 +53,7 @@ public class Ruudukko {
         }
     }
 
-    public void tulosta() {
+    public String toString() {
         String tulostus = "";
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
@@ -61,7 +61,7 @@ public class Ruudukko {
             }
             tulostus += "\n";
         }
-        System.out.println(tulostus);
+        return tulostus;
     }
 
     public void asetaTyhja(int rivi, int sarake) {

@@ -8,12 +8,14 @@ package ohjelma.ohha;
 public class Ruutu {
     private int xKoord;
     private int yKoord;
-    private int ruudunTila;
+    private int jNro;
+    private boolean sisalto;
 
-    public Ruutu(int xKoord, int yKoord, int ruudunTila) {
+    public Ruutu(int xKoord, int yKoord, int jnro, boolean sisalto) {
         this.xKoord = xKoord;
         this.yKoord = yKoord;
-        this.ruudunTila = ruudunTila;
+        this.jNro = jnro;
+        this.sisalto=sisalto;
     }
 
     public int getxKoord() {
@@ -31,8 +33,16 @@ public class Ruutu {
     public void setyKoord(int yKoord) {
         this.yKoord = yKoord;
     }
-    public int getTila(){
-        return this.ruudunTila;
+    public int getJNro(){
+        return this.jNro;
+    }
+
+    public boolean getSisalto() {
+        return sisalto;
+    }
+
+    public void setSisalto(boolean sisalto) {
+        this.sisalto = sisalto;
     }
     
     

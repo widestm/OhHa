@@ -1,12 +1,6 @@
 package ohjelma.ohha;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,7 +15,6 @@ import static org.junit.Assert.*;
 public class RuudukkoTest {
 
     Ruudukko test;
-    ByteArrayOutputStream tulostus;
 
     public RuudukkoTest() {
     }
@@ -38,8 +31,6 @@ public class RuudukkoTest {
     public void setUp() {
         test = new Ruudukko(4, 3, 0, 2);
         test.taytaRuudukko();
-        tulostus = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(tulostus));
     }
 
     @After
@@ -82,10 +73,9 @@ public class RuudukkoTest {
                     "111\n"+
                     "111\n"+
                     "111\n"+
-                    "111\n\n"
+                    "111\n"
                 ;
-        test.tulosta();
-        assertEquals(odotettu, tulostus.toString());
+        assertEquals(odotettu, test.toString());
     }
     @Test
     public void tyhjaMeneeOikeaanPaikkaan(){
