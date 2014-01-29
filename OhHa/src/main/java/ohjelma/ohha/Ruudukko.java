@@ -9,6 +9,7 @@ import java.util.Random;
  * @author WidestM
  */
 public class Ruudukko {
+
     private int korkeus;
     private int leveys;
     private int tyhjaRivi;
@@ -60,7 +61,7 @@ public class Ruudukko {
         String tulostus = "";
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                tulostus += ruudukko[i][j].getSisalto() ? " + "+ruudukko[i][j].getJNro() : " - "+ruudukko[i][j].getJNro();
+                tulostus += ruudukko[i][j].getSisalto() ? " + " + ruudukko[i][j].getJNro() : " - " + ruudukko[i][j].getJNro();
             }
             tulostus += "\n";
         }
@@ -74,42 +75,60 @@ public class Ruudukko {
     public void asetaTyhja() {
         ruudukko[tyhjaRivi][tyhjaSarake].setSisalto(false);
     }
-    public void sekoitaRuudukko(){
-//        for (int i = 0; i < korkeus; i++) {
-//            Collections.shuffle(Arrays.asList(ruudukko[i]));
-//            Collections.shuffle(Arrays.asList(ruudukko));
-//        }
-        
-        
-        
+
+    public void sekoitaRuudukko() {
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
                 Ruutu temp = ruudukko[i][j];
                 int arvottuRivi = random.nextInt(korkeus);
                 int arvottuSarake = random.nextInt(leveys);
-                ruudukko[i][j]=ruudukko[arvottuRivi][arvottuSarake];
-                ruudukko[arvottuRivi][arvottuSarake]=temp;
+                ruudukko[i][j] = ruudukko[arvottuRivi][arvottuSarake];
+                ruudukko[arvottuRivi][arvottuSarake] = temp;
             }
         }
+    }
+
+    public boolean onkoRatkaistavissa() {
+        int inversioita = 0;
+
+        for (int i = 0; i < ruudukko.length; i++) {
+            for (int j = 0; j < ruudukko.length; j++) {
+                for (int k = 0; k < ruudukko[0].length; k++) {
+                    for (int l = 0; l < ruudukko[0].length; l++) {
+                        if (i < j || k < l && ruudukko[i][k].getJNro()< ruudukko[j][l].getJNro() && ruudukko[i][k].getJNro()!=0 && ruudukko[j][l].getJNro()!=0 ) {
+                            inversioita++;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        System.out.println(inversioita);
+        if (inversioita % 2 == 0) {
+            return true;
+        }
+
+        return false;
     }
 
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
         Ruutu temp = ruudukko[rivi][sarake];
         if (rivi > 0 && !ruudukko[rivi - 1][sarake].getSisalto()) {                     //ylhäälle siirto            
-                ruudukko[rivi][sarake] = ruudukko[rivi - 1][sarake];
-                ruudukko[rivi - 1][sarake] = temp;
-        } 
-            else if (rivi < (korkeus - 1) && !ruudukko[rivi + 1][sarake].getSisalto()) {  //alhaalle
-                ruudukko[rivi][sarake] = ruudukko[rivi + 1][sarake];
-                ruudukko[rivi + 1][sarake] = temp;
-        } 
-            else if (sarake > 0 && !ruudukko[rivi][sarake - 1].getSisalto()) {              //vasempaan
-                ruudukko[rivi][sarake] = ruudukko[rivi][sarake - 1];
-                ruudukko[rivi][sarake - 1] = temp;
-        } 
-            else if (sarake < leveys - 1 && !ruudukko[rivi][sarake + 1].getSisalto()) {     //oikealle
-                ruudukko[rivi][sarake] = ruudukko[rivi][sarake + 1];
-                ruudukko[rivi][sarake + 1] = temp;
+            ruudukko[rivi][sarake] = ruudukko[rivi - 1][sarake];
+            ruudukko[rivi - 1][sarake] = temp;
+        } else if (rivi < (korkeus - 1) && !ruudukko[rivi + 1][sarake].getSisalto()) {  //alhaalle
+            ruudukko[rivi][sarake] = ruudukko[rivi + 1][sarake];
+            ruudukko[rivi + 1][sarake] = temp;
+        } else if (sarake > 0 && !ruudukko[rivi][sarake - 1].getSisalto()) {              //vasempaan
+            ruudukko[rivi][sarake] = ruudukko[rivi][sarake - 1];
+            ruudukko[rivi][sarake - 1] = temp;
+        } else if (sarake < leveys - 1 && !ruudukko[rivi][sarake + 1].getSisalto()) {     //oikealle
+            ruudukko[rivi][sarake] = ruudukko[rivi][sarake + 1];
+            ruudukko[rivi][sarake + 1] = temp;
         }
 
     }
