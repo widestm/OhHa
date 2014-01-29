@@ -1,5 +1,7 @@
 package ohjelma.ohha;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -12,13 +14,14 @@ public class Ruudukko {
     private int tyhjaRivi;
     private int tyhjaSarake;
     private Ruutu[][] ruudukko;
+    private Random random;
 
     public Ruudukko(int korkeus, int leveys, int tyhjaRivi, int tyhjaSarake) {
         this.korkeus = korkeus;
         this.leveys = leveys;
         this.tyhjaRivi = tyhjaRivi;
         this.tyhjaSarake = tyhjaSarake;
-
+        this.random = new Random();
     }
 
     public Ruutu[][] getRuudukko() {
@@ -70,6 +73,24 @@ public class Ruudukko {
 
     public void asetaTyhja() {
         ruudukko[tyhjaRivi][tyhjaSarake].setSisalto(false);
+    }
+    public void sekoitaRuudukko(){
+//        for (int i = 0; i < korkeus; i++) {
+//            Collections.shuffle(Arrays.asList(ruudukko[i]));
+//            Collections.shuffle(Arrays.asList(ruudukko));
+//        }
+        
+        
+        
+        for (int i = 0; i < ruudukko.length; i++) {
+            for (int j = 0; j < ruudukko[0].length; j++) {
+                Ruutu temp = ruudukko[i][j];
+                int arvottuRivi = random.nextInt(korkeus);
+                int arvottuSarake = random.nextInt(leveys);
+                ruudukko[i][j]=ruudukko[arvottuRivi][arvottuSarake];
+                ruudukko[arvottuRivi][arvottuSarake]=temp;
+            }
+        }
     }
 
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
