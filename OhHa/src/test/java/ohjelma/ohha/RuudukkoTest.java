@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class RuudukkoTest {
 
     Ruudukko test;
+    int tyhjaRuutu;
 
     public RuudukkoTest() {
     }
@@ -30,6 +31,7 @@ public class RuudukkoTest {
     public void setUp() {
         test = new Ruudukko(4, 3, 0, 2);
         test.taytaRuudukko();
+        tyhjaRuutu = test.getKorkeus() * test.getLeveys();
     }
 
     @After
@@ -58,7 +60,7 @@ public class RuudukkoTest {
 
     @Test
     public void ruudunTayttaminenOikein() {
-        int n = 0;
+        int n = 1;
         test.taytaRuudukko();
         for (int i = 0; i < test.getKorkeus(); i++) {
             for (int j = 0; j < test.getLeveys(); j++) {
@@ -71,22 +73,76 @@ public class RuudukkoTest {
     @Test
     public void tulostusOikein() {
         String odotettu
-                = "0 1 2 \n"
-                + "3 4 5 \n"
-                + "6 7 8 \n"
-                + "9 10 11 \n";
+                = "1 2 3 \n"
+                + "4 5 6 \n"
+                + "7 8 9 \n"
+                + "10 11 12 \n";
         assertEquals(odotettu, test.toString());
     }
-//    @Test
-//    public void tyhjaMeneeOikeaanPaikkaan(){
-//        test.asetaTyhja();
-//        assertEquals(test.getRuudukko()[0][2], 0);
-//    }
-//    @Test
-//    public void tyhjanSiirtaminenToimii(){
-//        test.asetaTyhja();
-//        test.asetaTyhja(2, 2);
-//        assertEquals(test.getRuudukko()[0][2], 0);
-//    }
+
+    @Test
+    public void tyhjaMeneeOikeaanPaikkaan() {
+        test.asetaTyhja();
+        assertEquals(test.getRuudukko()[0][2].getJNro(), tyhjaRuutu);
+    }
+
+    @Test
+    public void tyhjanSiirtaminenToimii() {
+        test.asetaTyhja();
+        test.asetaTyhja(2, 2);
+        assertEquals(test.getRuudukko()[2][2].getJNro(), tyhjaRuutu);
+    }
+
+    @Test
+    public void siirtoVasemmalle() {
+        test.asetaTyhja();
+        int apum = test.getRuudukko()[0][1].getJNro();
+        test.siirto(0, 1);
+        assertEquals(test.getRuudukko()[0][1].getJNro(), tyhjaRuutu);
+        assertEquals(test.getRuudukko()[0][2].getJNro(), apum);
+
+    }
+
+    @Test
+    public void siirtoOikealle() {
+        test.asetaTyhja(1, 1);
+        int apum = test.getRuudukko()[1][2].getJNro();
+        test.siirto(1, 2);
+        assertEquals(test.getRuudukko()[1][2].getJNro(), tyhjaRuutu);
+        assertEquals(test.getRuudukko()[1][1].getJNro(), apum);
+
+    }
+
+    @Test
+    public void siirtoAlas() {
+        test.asetaTyhja(1, 1);
+        int apum = test.getRuudukko()[2][1].getJNro();
+        test.siirto(2, 1);
+        assertEquals(test.getRuudukko()[2][1].getJNro(), tyhjaRuutu);
+        assertEquals(test.getRuudukko()[1][1].getJNro(), apum);
+
+    }
+
+    @Test
+    public void siirtoYlos() {
+        test.asetaTyhja(1, 1);
+        int apum = test.getRuudukko()[0][1].getJNro();
+        test.siirto(0, 1);
+        assertEquals(test.getRuudukko()[0][1].getJNro(), tyhjaRuutu);
+        assertEquals(test.getRuudukko()[1][1].getJNro(), apum);
+
+    }
+
+    @Test
+    public void sekoitusSekoittaaJotain() {
+        Ruudukko temp = test;
+        test.sekoitaRuudukko();
+        assertSame(test.getRuudukko(), temp.getRuudukko());
+    }
+
+    @Test
+    public void inversiotOikeinYhdessaTapauksessa() {
+        assertEquals(test.onkoRatkaistavissa(), true);
+    }
 
 }

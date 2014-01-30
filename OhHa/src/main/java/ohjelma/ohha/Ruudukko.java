@@ -1,7 +1,5 @@
 package ohjelma.ohha;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -10,12 +8,13 @@ import java.util.Random;
  */
 public class Ruudukko {
 
-    private int korkeus;
-    private int leveys;
+    private final int korkeus;
+    private final int leveys;
     private int tyhjaRivi;
     private int tyhjaSarake;
     private Ruutu[][] ruudukko;
     private Random random;
+    private int taulukonViimeinen;
 
     public Ruudukko(int korkeus, int leveys, int tyhjaRivi, int tyhjaSarake) {
         this.korkeus = korkeus;
@@ -23,6 +22,7 @@ public class Ruudukko {
         this.tyhjaRivi = tyhjaRivi;
         this.tyhjaSarake = tyhjaSarake;
         this.random = new Random();
+        this.taulukonViimeinen = korkeus*leveys;
     }
 
     public Ruutu[][] getRuudukko() {
@@ -50,7 +50,7 @@ public class Ruudukko {
         ruudukko = new Ruutu[korkeus][leveys];
         for (int sarake = 0; sarake < korkeus; sarake++) {
             for (int rivi = 0; rivi < leveys; rivi++) {
-                ruudukko[sarake][rivi] = new Ruutu(sarake, rivi, n, true);
+                ruudukko[sarake][rivi] = new Ruutu(sarake, rivi, n);
                 n++;
             }
         }
@@ -67,22 +67,25 @@ public class Ruudukko {
         }
         return tulostus;
     }
-//    public void asetaTyhja(int rivi, int sarake) {
-//        Ruutu temp = ruudukko[rivi][sarake];
-//        for (int i = 0; i < ruudukko.length; i++) {
-//            for (int j = 0; j < ruudukko.length; j++) {
-//                if (ruudukko[i][j].getJNro() == 16) {
-//                    ruudukko[rivi][sarake] = ruudukko[i][j];
-//                    ruudukko
-//                }
-//            }
-//
-//        }
-//
-//        ruudukko[rivi][sarake] =
-//    }
+
+    public void asetaTyhja(int rivi, int sarake) {
+        this.tyhjaRivi = rivi;
+        this.tyhjaSarake = sarake;
+        this.asetaTyhja();
+    }
+
     public void asetaTyhja() {
-        ruudukko[tyhjaRivi][tyhjaSarake].setSisalto(false);
+        Ruutu temp;
+        for (int i = 0; i < ruudukko.length; i++) {
+            for (int j = 0; j < ruudukko[0].length; j++) {
+                if (ruudukko[i][j].getJNro() == taulukonViimeinen) {
+                    temp = ruudukko[i][j];
+                    ruudukko[i][j] = ruudukko[tyhjaRivi][tyhjaSarake];
+                    ruudukko[tyhjaRivi][tyhjaSarake] = temp;
+                    break;
+                }
+            }
+        }
     }
 
     public void sekoitaRuudukko() {
@@ -102,7 +105,7 @@ public class Ruudukko {
         int x = 0;
         int y = 0;
         int verrattava;
-        
+
         while (true) {
 //            System.out.println("verrattava: " + y + ", " + x);            //debugrivi
             verrattava = ruudukko[y][x].getJNro();
@@ -115,10 +118,11 @@ public class Ruudukko {
                 x = 0;
             }
             for (int i = y; i < ruudukko.length; i++) {
+                
                 if (i == y) {
                     for (int j = x; j < ruudukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);                //debug
-                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
+                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
@@ -126,7 +130,7 @@ public class Ruudukko {
                 } else {
                     for (int j = 0; j < ruudukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);               //debug
-                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
+                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
@@ -143,20 +147,24 @@ public class Ruudukko {
     }
 
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
-        Ruutu temp = ruudukko[rivi][sarake];
-        if (rivi > 0 && !ruudukko[rivi - 1][sarake].getSisalto()) {                     //ylhäälle siirto            
-            ruudukko[rivi][sarake] = ruudukko[rivi - 1][sarake];
-            ruudukko[rivi - 1][sarake] = temp;
-        } else if (rivi < (korkeus - 1) && !ruudukko[rivi + 1][sarake].getSisalto()) {  //alhaalle
-            ruudukko[rivi][sarake] = ruudukko[rivi + 1][sarake];
-            ruudukko[rivi + 1][sarake] = temp;
-        } else if (sarake > 0 && !ruudukko[rivi][sarake - 1].getSisalto()) {              //vasempaan
-            ruudukko[rivi][sarake] = ruudukko[rivi][sarake - 1];
-            ruudukko[rivi][sarake - 1] = temp;
-        } else if (sarake < leveys - 1 && !ruudukko[rivi][sarake + 1].getSisalto()) {     //oikealle
-            ruudukko[rivi][sarake] = ruudukko[rivi][sarake + 1];
-            ruudukko[rivi][sarake + 1] = temp;
+        int uusiRivi = rivi;
+        int uusiSarake = sarake;
+        if (rivi > 0 && ruudukko[rivi - 1][sarake].getJNro() == taulukonViimeinen) {                     //ylhäälle siirto            
+            uusiRivi--;
+        } else if (rivi < (korkeus - 1) && ruudukko[rivi + 1][sarake].getJNro() == taulukonViimeinen) {  //alhaalle
+            uusiRivi++;
+        } else if (sarake > 0 && ruudukko[rivi][sarake - 1].getJNro() == taulukonViimeinen) {              //vasempaan
+            uusiSarake--;
+        } else if (sarake < leveys - 1 && ruudukko[rivi][sarake + 1].getJNro() == taulukonViimeinen) {     //oikealle
+            uusiSarake++;
         }
+
+        Ruutu temp = ruudukko[rivi][sarake];
+        ruudukko[rivi][sarake] = ruudukko[uusiRivi][uusiSarake];
+        ruudukko[uusiRivi][uusiSarake] = temp;
+        this.tyhjaRivi=rivi;
+        this.tyhjaSarake=sarake;
+        
 
     }
 }
