@@ -67,7 +67,6 @@ public class Ruudukko {
         }
         return tulostus;
     }
-
 //    public void asetaTyhja(int rivi, int sarake) {
 //        Ruutu temp = ruudukko[rivi][sarake];
 //        for (int i = 0; i < ruudukko.length; i++) {
@@ -105,7 +104,7 @@ public class Ruudukko {
         int verrattava;
         
         while (true) {
-            System.out.println("verrattava: " + y + ", " + x);
+//            System.out.println("verrattava: " + y + ", " + x);            //debugrivi
             verrattava = ruudukko[y][x].getJNro();
             x++;
             if (x > ruudukko[0].length - 1) {
@@ -118,7 +117,7 @@ public class Ruudukko {
             for (int i = y; i < ruudukko.length; i++) {
                 if (i == y) {
                     for (int j = x; j < ruudukko[0].length; j++) {
-                        System.out.println("i: " + i + " j:" + j);
+//                        System.out.println("i: " + i + " j:" + j);                //debug
                         if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
                             inversioita++;
 
@@ -126,7 +125,7 @@ public class Ruudukko {
                     }
                 } else {
                     for (int j = 0; j < ruudukko[0].length; j++) {
-                        System.out.println("i: " + i + " j:" + j);
+//                        System.out.println("i: " + i + " j:" + j);               //debug
                         if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
                             inversioita++;
 
