@@ -68,23 +68,20 @@ public class Ruudukko {
         return tulostus;
     }
 
-    public void asetaTyhja(int rivi, int sarake) {
-        Ruutu temp = ruudukko[rivi][sarake];
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko.length; j++) {
-                if (ruudukko[i][j].getJNro()==16) {
-                    ruudukko[rivi][sarake]=ruudukko[i][j];
-                    ruudukko
-                }
-            }
-            
-        }
-        
-        
-        
-        ruudukko[rivi][sarake]=
-    }
-
+//    public void asetaTyhja(int rivi, int sarake) {
+//        Ruutu temp = ruudukko[rivi][sarake];
+//        for (int i = 0; i < ruudukko.length; i++) {
+//            for (int j = 0; j < ruudukko.length; j++) {
+//                if (ruudukko[i][j].getJNro() == 16) {
+//                    ruudukko[rivi][sarake] = ruudukko[i][j];
+//                    ruudukko
+//                }
+//            }
+//
+//        }
+//
+//        ruudukko[rivi][sarake] =
+//    }
     public void asetaTyhja() {
         ruudukko[tyhjaRivi][tyhjaSarake].setSisalto(false);
     }
@@ -106,24 +103,27 @@ public class Ruudukko {
         int x = 0;
         int y = 0;
         int verrattava;
+
         while (true) {
             System.out.println("verrattava: " + y + ", " + x);
             verrattava = ruudukko[y][x].getJNro();
             x++;
-            if (x > ruudukko[0].length-1) {
+            if (x > ruudukko[0].length - 1) {
                 y++;
-                if (y > ruudukko.length-1) {
+                if (y > ruudukko.length - 1) {
                     break;
                 }
                 x = 0;
             }
-            System.out.println("aloitusruutu: " + y + ", " + x);
+//            System.out.println("aloitusruutu: " + y + ", " + x);
             for (int i = y; i < ruudukko.length; i++) {
                 for (int j = x; j < ruudukko[0].length; j++) {
-                    if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro()!=16 &&verrattava!=16) {
+                    System.out.println("i: " + i + " j:" + j);
+                    if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
                         inversioita++;
-                    }
+                        
 
+                    }
                 }
 
             }
