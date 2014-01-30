@@ -7,4 +7,9 @@ Ohha harjoitustyö tuntidokumentaatio
 20.1.2014 : 0,5h Hieman suunnittelua lisää
 
 23.1.2014 : 2h Koodin rakenteen suunnittelua ja hieman siirto- ja taulun luontilogiikkaa lisätty
+
 23.1.2014 : 1h pari testiä ja luokkakaaviot
+
+29.1.2014 : 5h väännetty metodeja Ruudukolla, vittumaista tarkistaa miten onko taulu ratkaistavissa.
+
+30.1.2014 : 2h Inversioiden laskumetodi toimii, lisätty paljon testejä ruudukolle. Koodia myös refaktoroitu puolin ja toisin.
