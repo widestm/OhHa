@@ -103,7 +103,7 @@ public class Ruudukko {
         int x = 0;
         int y = 0;
         int verrattava;
-
+        
         while (true) {
             System.out.println("verrattava: " + y + ", " + x);
             verrattava = ruudukko[y][x].getJNro();
@@ -115,27 +115,32 @@ public class Ruudukko {
                 }
                 x = 0;
             }
-//            System.out.println("aloitusruutu: " + y + ", " + x);
             for (int i = y; i < ruudukko.length; i++) {
-                for (int j = x; j < ruudukko[0].length; j++) {
-                    System.out.println("i: " + i + " j:" + j);
-                    if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
-                        inversioita++;
-                        
+                if (i == y) {
+                    for (int j = x; j < ruudukko[0].length; j++) {
+                        System.out.println("i: " + i + " j:" + j);
+                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
+                            inversioita++;
 
+                        }
+                    }
+                } else {
+                    for (int j = 0; j < ruudukko[0].length; j++) {
+                        System.out.println("i: " + i + " j:" + j);
+                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != 16 && verrattava != 16) {
+                            inversioita++;
+
+                        }
                     }
                 }
-
             }
-
         }
-
         System.out.println(inversioita);
         if (inversioita % 2 == 0) {
             return true;
         }
-
         return false;
+
     }
 
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
