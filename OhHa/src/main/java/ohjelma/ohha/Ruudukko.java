@@ -12,7 +12,7 @@ public class Ruudukko {
     private final int leveys;
     private int tyhjaRivi;
     private int tyhjaSarake;
-    private Ruutu[][] ruudukko;
+    private int[][] ruudukko;
     private Random random;
     private int taulukonViimeinen;
 
@@ -25,7 +25,7 @@ public class Ruudukko {
         this.taulukonViimeinen = korkeus*leveys;
     }
 
-    public Ruutu[][] getRuudukko() {
+    public int[][] getRuudukko() {
         return ruudukko;
     }
 
@@ -47,10 +47,10 @@ public class Ruudukko {
 
     public void taytaRuudukko() {
         int n = 1;
-        ruudukko = new Ruutu[korkeus][leveys];
+        ruudukko = new int[korkeus][leveys];
         for (int sarake = 0; sarake < korkeus; sarake++) {
             for (int rivi = 0; rivi < leveys; rivi++) {
-                ruudukko[sarake][rivi] = new Ruutu(sarake, rivi, n);
+                ruudukko[sarake][rivi] = n;
                 n++;
             }
         }
@@ -61,7 +61,7 @@ public class Ruudukko {
         String tulostus = "";
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                tulostus += ruudukko[i][j].getJNro() + " ";
+                tulostus += ruudukko[i][j] + " ";
             }
             tulostus += "\n";
         }
@@ -75,10 +75,10 @@ public class Ruudukko {
     }
 
     public void asetaTyhja() {
-        Ruutu temp;
+        int temp;
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                if (ruudukko[i][j].getJNro() == taulukonViimeinen) {
+                if (ruudukko[i][j] == taulukonViimeinen) {
                     temp = ruudukko[i][j];
                     ruudukko[i][j] = ruudukko[tyhjaRivi][tyhjaSarake];
                     ruudukko[tyhjaRivi][tyhjaSarake] = temp;
@@ -91,7 +91,7 @@ public class Ruudukko {
     public void sekoitaRuudukko() {
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
-                Ruutu temp = ruudukko[i][j];
+                int temp = ruudukko[i][j];
                 int arvottuRivi = random.nextInt(korkeus);
                 int arvottuSarake = random.nextInt(leveys);
                 ruudukko[i][j] = ruudukko[arvottuRivi][arvottuSarake];
@@ -108,7 +108,7 @@ public class Ruudukko {
 
         while (true) {
 //            System.out.println("verrattava: " + y + ", " + x);            //debugrivi
-            verrattava = ruudukko[y][x].getJNro();
+            verrattava = ruudukko[y][x];
             x++;
             if (x > ruudukko[0].length - 1) {
                 y++;
@@ -122,7 +122,7 @@ public class Ruudukko {
                 if (i == y) {
                     for (int j = x; j < ruudukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);                //debug
-                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != taulukonViimeinen && verrattava != taulukonViimeinen) {
+                        if (ruudukko[i][j] < verrattava && ruudukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
@@ -130,7 +130,7 @@ public class Ruudukko {
                 } else {
                     for (int j = 0; j < ruudukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);               //debug
-                        if (ruudukko[i][j].getJNro() < verrattava && ruudukko[i][j].getJNro() != taulukonViimeinen && verrattava != taulukonViimeinen) {
+                        if (ruudukko[i][j] < verrattava && ruudukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
@@ -149,17 +149,17 @@ public class Ruudukko {
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
         int uusiRivi = rivi;
         int uusiSarake = sarake;
-        if (rivi > 0 && ruudukko[rivi - 1][sarake].getJNro() == taulukonViimeinen) {                     //ylhäälle siirto            
+        if (rivi > 0 && ruudukko[rivi - 1][sarake] == taulukonViimeinen) {                     //ylhäälle siirto            
             uusiRivi--;
-        } else if (rivi < (korkeus - 1) && ruudukko[rivi + 1][sarake].getJNro() == taulukonViimeinen) {  //alhaalle
+        } else if (rivi < (korkeus - 1) && ruudukko[rivi + 1][sarake] == taulukonViimeinen) {  //alhaalle
             uusiRivi++;
-        } else if (sarake > 0 && ruudukko[rivi][sarake - 1].getJNro() == taulukonViimeinen) {              //vasempaan
+        } else if (sarake > 0 && ruudukko[rivi][sarake - 1] == taulukonViimeinen) {              //vasempaan
             uusiSarake--;
-        } else if (sarake < leveys - 1 && ruudukko[rivi][sarake + 1].getJNro() == taulukonViimeinen) {     //oikealle
+        } else if (sarake < leveys - 1 && ruudukko[rivi][sarake + 1] == taulukonViimeinen) {     //oikealle
             uusiSarake++;
         }
 
-        Ruutu temp = ruudukko[rivi][sarake];
+        int temp = ruudukko[rivi][sarake];
         ruudukko[rivi][sarake] = ruudukko[uusiRivi][uusiSarake];
         ruudukko[uusiRivi][uusiSarake] = temp;
         this.tyhjaRivi=rivi;

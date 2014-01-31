@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * @author mikaelwi
  */
 public class RuutuTest {
-    
+    Ruutu ruutu;
     public RuutuTest() {
     }
     
@@ -32,6 +32,7 @@ public class RuutuTest {
     
     @Before
     public void setUp() {
+    this.ruutu=new Ruutu(10, 10, 10);
     }
     
     @After
