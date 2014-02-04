@@ -16,6 +16,13 @@ public class Ruudukko {
     private Random random;
     private int taulukonViimeinen;
 
+    /**
+     *
+     * @param korkeus
+     * @param leveys
+     * @param tyhjaRivi
+     * @param tyhjaSarake
+     */
     public Ruudukko(int korkeus, int leveys, int tyhjaRivi, int tyhjaSarake) {
         this.korkeus = korkeus;
         this.leveys = leveys;
@@ -25,26 +32,49 @@ public class Ruudukko {
         this.taulukonViimeinen = korkeus*leveys;
     }
 
+    /**
+     *
+     * @return
+     */
     public int[][] getRuudukko() {
         return ruudukko;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getKorkeus() {
         return korkeus;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLeveys() {
         return leveys;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTyhjaRivi() {
         return tyhjaRivi;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTyhjaSarake() {
         return tyhjaSarake;
     }
 
+    /**
+     *
+     */
     public void taytaRuudukko() {
         int n = 1;
         ruudukko = new int[korkeus][leveys];
@@ -68,12 +98,20 @@ public class Ruudukko {
         return tulostus;
     }
 
+    /**
+     *
+     * @param rivi
+     * @param sarake
+     */
     public void asetaTyhja(int rivi, int sarake) {
         this.tyhjaRivi = rivi;
         this.tyhjaSarake = sarake;
         this.asetaTyhja();
     }
 
+    /**
+     *
+     */
     public void asetaTyhja() {
         int temp;
         for (int i = 0; i < ruudukko.length; i++) {
@@ -88,6 +126,9 @@ public class Ruudukko {
         }
     }
 
+    /**
+     *
+     */
     public void sekoitaRuudukko() {
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
@@ -100,6 +141,10 @@ public class Ruudukko {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean onkoRatkaistavissa() {
         int inversioita = 0;
         int x = 0;
@@ -146,6 +191,11 @@ public class Ruudukko {
 
     }
 
+    /**
+     *
+     * @param rivi
+     * @param sarake
+     */
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
         int uusiRivi = rivi;
         int uusiSarake = sarake;

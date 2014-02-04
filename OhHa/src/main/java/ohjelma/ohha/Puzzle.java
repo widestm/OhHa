@@ -3,8 +3,16 @@ package ohjelma.ohha;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ *
+ * @author WidestM
+ */
 public class Puzzle {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Random rand = new Random();
         Scanner s = new Scanner(System.in);
