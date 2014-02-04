@@ -29,10 +29,9 @@ public class Ruudukko {
         this.tyhjaRivi = tyhjaRivi;
         this.tyhjaSarake = tyhjaSarake;
         this.random = new Random();
-        this.taulukonViimeinen = korkeus*leveys;
+        this.taulukonViimeinen = korkeus * leveys;
     }
 
-    
     public int[][] getRuudukko() {
         return ruudukko;
     }
@@ -41,23 +40,20 @@ public class Ruudukko {
         return korkeus;
     }
 
-    
     public int getLeveys() {
         return leveys;
     }
 
-    
     public int getTyhjaRivi() {
         return tyhjaRivi;
     }
 
-    
     public int getTyhjaSarake() {
         return tyhjaSarake;
     }
 
-    /** 
-     *  Täyttää ruudukon konstruktorissa asetetuilla arvoilla
+    /**
+     * Täyttää ruudukon konstruktorissa asetetuilla arvoilla
      */
     public void taytaRuudukko() {
         int n = 1;
@@ -83,8 +79,9 @@ public class Ruudukko {
     }
 
     /**
-     *  Muuttaa this.tyhjaRivi ja this.tyhjaSarake muuttujien arvoa ja kutsuu metodia this.asetaTyhja()
-     * 
+     * Muuttaa this.tyhjaRivi ja this.tyhjaSarake muuttujien arvoa ja kutsuu
+     * metodia this.asetaTyhja()
+     *
      * @param rivi Kertoo mille riville tyhjä merkki asetetaan
      * @param sarake Kertoo mille sarakkeelle tyhjä merkki asetetaan
      */
@@ -95,8 +92,9 @@ public class Ruudukko {
     }
 
     /**
-     * Asettaa tyhjän merkin siihen paikkaan johon this.tyhjaRivi ja this.tyhjaSarake
-     * osoittaa. Ohjelman toteuksessa taulukon suurinta arvoa ajatellaan tyhjänä.
+     * Asettaa tyhjän merkin siihen paikkaan johon this.tyhjaRivi ja
+     * this.tyhjaSarake osoittaa. Ohjelman toteuksessa taulukon suurinta arvoa
+     * ajatellaan tyhjänä.
      *
      */
     public void asetaTyhja() {
@@ -116,7 +114,6 @@ public class Ruudukko {
     /**
      * Sekoittaa ruukudon luvut
      */
-    
     public void sekoitaRuudukko() {
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
@@ -130,8 +127,10 @@ public class Ruudukko {
     }
 
     /**
-     * Tämä metodi laskee taulukossa olevien inversioiden määrän ja palauttaa true jos niitä on parillinen
-     * määrä ja silloin pelin pystyy ratkaista siirtämällä vain tyhjää ruutua yhden askeleen kerralla.
+     * Tämä metodi laskee taulukossa olevien inversioiden määrän ja palauttaa
+     * true jos niitä on parillinen määrä ja silloin pelin pystyy ratkaista
+     * siirtämällä vain tyhjää ruutua yhden askeleen kerralla.
+     *
      * @return Palauttaa true jos peli on ratkaistavissa
      */
     public boolean onkoRatkaistavissa() {
@@ -152,7 +151,7 @@ public class Ruudukko {
                 x = 0;
             }
             for (int i = y; i < ruudukko.length; i++) {
-                
+
                 if (i == y) {
                     for (int j = x; j < ruudukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);                //debug
@@ -172,7 +171,6 @@ public class Ruudukko {
                 }
             }
         }
-        System.out.println(inversioita);
         if (inversioita % 2 == 0) {
             return true;
         }
@@ -181,10 +179,11 @@ public class Ruudukko {
     }
 
     /**
-     *  Metodissa osoitetaan jotain ruutua taulukossa, jos tämän kyseisen ruudun (rivi, sarake) vieressä
-     * on tyhjä ruutu, ruudut vaihtavat paikkaa. 
-     * Metodi päivittää myös muuttujat this.tyhjaRivi ja this.tyhjaSarake jotta ne ovat oikein.
-     * 
+     * Metodissa osoitetaan jotain ruutua taulukossa, jos tämän kyseisen ruudun
+     * (rivi, sarake) vieressä on tyhjä ruutu, ruudut vaihtavat paikkaa. Metodi
+     * päivittää myös muuttujat this.tyhjaRivi ja this.tyhjaSarake jotta ne ovat
+     * oikein.
+     *
      * @param rivi Siirrettävän ruudun rivi
      * @param sarake Siirrettävän ruudun sarake
      */
@@ -204,9 +203,23 @@ public class Ruudukko {
         int temp = ruudukko[rivi][sarake];
         ruudukko[rivi][sarake] = ruudukko[uusiRivi][uusiSarake];
         ruudukko[uusiRivi][uusiSarake] = temp;
-        this.tyhjaRivi=rivi;
-        this.tyhjaSarake=sarake;
-        
+        this.tyhjaRivi = rivi;
+        this.tyhjaSarake = sarake;
+    }
 
+    public boolean ratkaistu() {
+        boolean palautus = true;
+        int apu = 1;
+        for (int i = 0; i < ruudukko.length; i++) {
+            for (int j = 0; j < ruudukko[0].length; j++) {
+                if (ruudukko[i][j] != apu) {
+                    palautus = false;
+                }
+                apu++;
+            }
+
+        }
+
+        return palautus;
     }
 }
