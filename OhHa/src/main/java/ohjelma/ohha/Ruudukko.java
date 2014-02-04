@@ -32,48 +32,32 @@ public class Ruudukko {
         this.taulukonViimeinen = korkeus*leveys;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public int[][] getRuudukko() {
         return ruudukko;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getKorkeus() {
         return korkeus;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public int getLeveys() {
         return leveys;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public int getTyhjaRivi() {
         return tyhjaRivi;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public int getTyhjaSarake() {
         return tyhjaSarake;
     }
 
-    /**
-     *
+    /** 
+     *  Täyttää ruudukon konstruktorissa asetetuilla arvoilla
      */
     public void taytaRuudukko() {
         int n = 1;
@@ -99,9 +83,10 @@ public class Ruudukko {
     }
 
     /**
-     *
-     * @param rivi
-     * @param sarake
+     *  Muuttaa this.tyhjaRivi ja this.tyhjaSarake muuttujien arvoa ja kutsuu metodia this.asetaTyhja()
+     * 
+     * @param rivi Kertoo mille riville tyhjä merkki asetetaan
+     * @param sarake Kertoo mille sarakkeelle tyhjä merkki asetetaan
      */
     public void asetaTyhja(int rivi, int sarake) {
         this.tyhjaRivi = rivi;
@@ -110,6 +95,8 @@ public class Ruudukko {
     }
 
     /**
+     * Asettaa tyhjän merkin siihen paikkaan johon this.tyhjaRivi ja this.tyhjaSarake
+     * osoittaa. Ohjelman toteuksessa taulukon suurinta arvoa ajatellaan tyhjänä.
      *
      */
     public void asetaTyhja() {
@@ -127,8 +114,9 @@ public class Ruudukko {
     }
 
     /**
-     *
+     * Sekoittaa ruukudon luvut
      */
+    
     public void sekoitaRuudukko() {
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko[0].length; j++) {
@@ -142,8 +130,9 @@ public class Ruudukko {
     }
 
     /**
-     *
-     * @return
+     * Tämä metodi laskee taulukossa olevien inversioiden määrän ja palauttaa true jos niitä on parillinen
+     * määrä ja silloin pelin pystyy ratkaista siirtämällä vain tyhjää ruutua yhden askeleen kerralla.
+     * @return Palauttaa true jos peli on ratkaistavissa
      */
     public boolean onkoRatkaistavissa() {
         int inversioita = 0;
@@ -192,9 +181,12 @@ public class Ruudukko {
     }
 
     /**
-     *
-     * @param rivi
-     * @param sarake
+     *  Metodissa osoitetaan jotain ruutua taulukossa, jos tämän kyseisen ruudun (rivi, sarake) vieressä
+     * on tyhjä ruutu, ruudut vaihtavat paikkaa. 
+     * Metodi päivittää myös muuttujat this.tyhjaRivi ja this.tyhjaSarake jotta ne ovat oikein.
+     * 
+     * @param rivi Siirrettävän ruudun rivi
+     * @param sarake Siirrettävän ruudun sarake
      */
     public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
         int uusiRivi = rivi;
