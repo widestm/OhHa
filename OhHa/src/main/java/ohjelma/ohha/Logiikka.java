@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ohjelma.ohha;
 
 import java.util.Scanner;
@@ -15,14 +10,25 @@ public class Logiikka {
 
     private Ruudukko r;
     private Scanner luk;
+    private int siirtoja;
+    private long aloitusAika;
+    private long lopetusAika;
 
+    /**
+     *
+     * @param ruudukko
+     */
     public Logiikka(Ruudukko ruudukko) {
         this.r = ruudukko;
         this.luk = new Scanner(System.in);
 
     }
 
-    public void käynnistä() {
+    /**
+     * Metodi luo ruudukon alustaa sen, testaa ratkaistavuuden, pyörittää
+     * looppia kunnes siirtojen avulla saadaan ratkaistu taulukko
+     */
+    public void kaynnista() {
         r.taytaRuudukko();
 
         while (true) {
@@ -32,31 +38,49 @@ public class Logiikka {
                 break;
             }
         }
-        System.out.println(r.onkoRatkaistavissa());
+        r.asetaTyhja(3, 2);
         System.out.println(r.toString());
         System.out.println("Hei! Tervetuloa Sliding Puzzleen");
         System.out.println("Tyhjä ruutu on taulukon suurin arvo!");
         System.out.println("Voit siirtää vain yhtä ruutua kerralla");
         System.out.println("Jos ruudun vieressä on tyhjä ruutu se siirretään sen tilalle");
-        
-        while (true) {
-            
-            if (r.ratkaistu()) {
-                System.out.println("Onneksi olkoon, ratkaisit pelin!");
-                break;
-            }
+        aloitaAjastus();
+        while (!r.ratkaistu()) {
+
             System.out.println("Anna rivi: ");
             int rivi = Integer.parseInt(luk.nextLine());
             System.out.println("Anna sarake: ");
             int sarake = Integer.parseInt(luk.nextLine());
             r.siirto(rivi, sarake);
+            siirtoja++;
             System.out.println(r.toString());
-            if (r.ratkaistu()) {
-                System.out.println("Onneksi olkoon, ratkaisit pelin!");
-                break;
-            }
-
         }
+        lopetaAjastus();
+        System.out.println("Onneksi olkoon, ratkaisit pelin!");
+        System.out.println("Käytit ratkaisemiseen " + siirtoja + " siirtoa ja aikaa "+this.aikaaKaytetty()+"s");
+        
+    }
+
+    /**
+     *  Metodi aloittaa ajastuksen
+     */
+    public void aloitaAjastus() {
+        this.aloitusAika = System.currentTimeMillis();
+    }
+
+    /**
+     *  Metodi lopettaa ajastuksen
+     */
+    public void lopetaAjastus() {
+        this.lopetusAika = System.currentTimeMillis();
+    }
+
+    /**
+     *
+     * @return Palauttaa käytetyn ajan sekunneissa
+     */
+    public long aikaaKaytetty() {
+        return (this.lopetusAika - this.aloitusAika)/1000;
     }
 
 }
