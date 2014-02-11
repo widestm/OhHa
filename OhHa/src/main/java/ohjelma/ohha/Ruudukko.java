@@ -187,16 +187,21 @@ public class Ruudukko {
      * @param rivi Siirrettävän ruudun rivi
      * @param sarake Siirrettävän ruudun sarake
      */
-    public void siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
+    public boolean siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
+        boolean onnistuiko = false;
         int uusiRivi = rivi;
         int uusiSarake = sarake;
         if (rivi > 0 && ruudukko[rivi - 1][sarake] == taulukonViimeinen) {                     //ylhäälle siirto            
+            onnistuiko=true;
             uusiRivi--;
         } else if (rivi < (korkeus - 1) && ruudukko[rivi + 1][sarake] == taulukonViimeinen) {  //alhaalle
+            onnistuiko=true;
             uusiRivi++;
         } else if (sarake > 0 && ruudukko[rivi][sarake - 1] == taulukonViimeinen) {              //vasempaan
+            onnistuiko=true;
             uusiSarake--;
         } else if (sarake < leveys - 1 && ruudukko[rivi][sarake + 1] == taulukonViimeinen) {     //oikealle
+            onnistuiko=true;
             uusiSarake++;
         }
 
@@ -205,6 +210,7 @@ public class Ruudukko {
         ruudukko[uusiRivi][uusiSarake] = temp;
         this.tyhjaRivi = rivi;
         this.tyhjaSarake = sarake;
+        return onnistuiko;
     }
 
     public boolean ratkaistu() {

@@ -1,6 +1,5 @@
 package ohjelma.ohha;
 
-import java.util.Scanner;
 
 /**
  *
@@ -9,8 +8,7 @@ import java.util.Scanner;
 public class Logiikka {
 
     private Ruudukko r;
-    private Scanner luk;
-    private int siirtoja;
+    private int siirrot;
     private long aloitusAika;
     private long lopetusAika;
 
@@ -20,7 +18,6 @@ public class Logiikka {
      */
     public Logiikka(Ruudukko ruudukko) {
         this.r = ruudukko;
-        this.luk = new Scanner(System.in);
 
     }
 
@@ -38,38 +35,22 @@ public class Logiikka {
                 break;
             }
         }
-        r.asetaTyhja(3, 2);
-        System.out.println(r.toString());
-        System.out.println("Hei! Tervetuloa Sliding Puzzleen");
-        System.out.println("Tyhjä ruutu on taulukon suurin arvo!");
-        System.out.println("Voit siirtää vain yhtä ruutua kerralla");
-        System.out.println("Jos ruudun vieressä on tyhjä ruutu se siirretään sen tilalle");
-        aloitaAjastus();
-        while (!r.ratkaistu()) {
 
-            System.out.println("Anna rivi: ");
-            int rivi = Integer.parseInt(luk.nextLine());
-            System.out.println("Anna sarake: ");
-            int sarake = Integer.parseInt(luk.nextLine());
-            r.siirto(rivi, sarake);
-            siirtoja++;
-            System.out.println(r.toString());
-        }
-        lopetaAjastus();
-        System.out.println("Onneksi olkoon, ratkaisit pelin!");
-        System.out.println("Käytit ratkaisemiseen " + siirtoja + " siirtoa ja aikaa "+this.aikaaKaytetty()+"s");
-        
+    }
+
+    public int getSiirrot() {
+        return siirrot;
     }
 
     /**
-     *  Metodi aloittaa ajastuksen
+     * Metodi aloittaa ajastuksen
      */
     public void aloitaAjastus() {
         this.aloitusAika = System.currentTimeMillis();
     }
 
     /**
-     *  Metodi lopettaa ajastuksen
+     * Metodi lopettaa ajastuksen
      */
     public void lopetaAjastus() {
         this.lopetusAika = System.currentTimeMillis();
@@ -80,7 +61,26 @@ public class Logiikka {
      * @return Palauttaa käytetyn ajan sekunneissa
      */
     public long aikaaKaytetty() {
-        return (this.lopetusAika - this.aloitusAika)/1000;
+        return (this.lopetusAika - this.aloitusAika) / 1000;
+    }
+
+    public void siirra(int rivi, int sarake) {
+        if (r.siirto(rivi, sarake)) {
+            siirrot++;
+        }
+        
+    }
+
+    @Override
+    public String toString() {
+        return r.toString();
+    }
+
+    public boolean ratkaistu() {
+        if (r.ratkaistu()) {
+            return false;
+        }
+        return true;
     }
 
 }

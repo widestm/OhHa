@@ -1,16 +1,52 @@
 package ohjelma.ohha;
 
+import java.util.Scanner;
+
 /**
  *
  * @author WidestM
  */
 public class TekstiKayttoliittyma implements Kayttoliittyma {
 
-    
-    
+    private Logiikka logi;
+    private Ruudukko ruudukko;
+    private Scanner luk;
+
+    public TekstiKayttoliittyma(Ruudukko ruudukko) {
+        this.ruudukko = ruudukko;
+        this.logi = new Logiikka(ruudukko);
+        this.luk = new Scanner(System.in);
+
+    }
+
     @Override
     public void siirra(int rivi, int sarake) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        logi.siirra(rivi, sarake);
     }
-    
+
+    public void kaynnista() {
+        logi.kaynnista();
+
+        System.out.println(logi.toString());
+        System.out.println("Hei! Tervetuloa Sliding Puzzleen");
+        System.out.println("Taulukon suurin arvo toimii tyhjänä ruutuna! (Tässä 16)\n");
+        System.out.println("Voit siirtää vain yhtä ruutua kerralla");
+        System.out.println("Jos ruudun vieressä on tyhjä ruutu se siirretään sen tilalle\n");
+        
+        logi.aloitaAjastus();
+        while (logi.ratkaistu()) {
+            System.out.println("Anna rivi: ");
+            int rivi = Integer.parseInt(luk.nextLine());
+            System.out.println("Anna sarake: ");
+            int sarake = Integer.parseInt(luk.nextLine());
+            logi.siirra(rivi, sarake);
+
+            System.out.println("\n" + logi.toString());
+        }
+        logi.lopetaAjastus();
+        
+        System.out.println("Onneksi olkoon, ratkaisit pelin!");
+        System.out.println("Käytit ratkaisemiseen " + logi.getSiirrot() + " siirtoa ja aikaa " + logi.aikaaKaytetty() + "s");
+    }
+
 }
