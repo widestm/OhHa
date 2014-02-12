@@ -19,5 +19,7 @@ Ohha harjoitustyö tuntidokumentaatio
 5.2.2014 : 2h Tehty vähän Logiikka luokka ja suunniteltu rakennetta käyttöliittymille jne.
 Luokkakaaviota päivitelty hieman.
 
+11.2.2014: 2h Luokkakaaviota muokattu,logiikka kokonaan valmis. Graafista käyttöliittymää ihmetelty.
+
 
 Yht tähän mennessä: n. 17h
