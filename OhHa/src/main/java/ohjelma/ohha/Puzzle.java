@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author WidestM
+ * @author Mikael Wide
  */
 public class Puzzle {
 
@@ -21,9 +21,12 @@ public class Puzzle {
 //        
         JFrame window = new JFrame("Sliding Puzzle");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setContentPane(new PeliPaneeli());
+        Pelilauta peli = new Pelilauta();
+        window.setContentPane(peli);
         window.pack();  // finalize layout
         window.show();  // make window visible
-        window.setResizable(false);
+        window.setResizable(true);
     }
+
+  
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author WidestM
+ * @author Mikael Wide
  */
 public class TekstiKayttoliittyma implements Kayttoliittyma {
 
@@ -31,7 +31,7 @@ public class TekstiKayttoliittyma implements Kayttoliittyma {
      * 
      */
     public void kaynnista() {
-        logi.kaynnista();
+        logi.alusta();
 
         System.out.println(logi.toString());
         System.out.println("Hei! Tervetuloa Sliding Puzzleen");

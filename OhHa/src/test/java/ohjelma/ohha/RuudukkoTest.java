@@ -64,7 +64,7 @@ public class RuudukkoTest {
         test.taytaRuudukko();
         for (int i = 0; i < test.getKorkeus(); i++) {
             for (int j = 0; j < test.getLeveys(); j++) {
-                assertEquals(test.getRuudukko()[i][j], n);
+                assertEquals(test.getTaulukko()[i][j], n);
                 n++;
             }
         }
@@ -83,53 +83,53 @@ public class RuudukkoTest {
     @Test
     public void tyhjaMeneeOikeaanPaikkaan() {
         test.asetaTyhja();
-        assertEquals(test.getRuudukko()[0][2], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[0][2], tyhjaRuutu);
     }
 
     @Test
     public void tyhjanSiirtaminenToimii() {
         test.asetaTyhja();
         test.asetaTyhja(2, 2);
-        assertEquals(test.getRuudukko()[2][2], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[2][2], tyhjaRuutu);
     }
 
     @Test
     public void siirtoVasemmalle() {
         test.asetaTyhja();
-        int apum = test.getRuudukko()[0][1];
+        int apum = test.getTaulukko()[0][1];
         test.siirto(0, 1);
-        assertEquals(test.getRuudukko()[0][1], tyhjaRuutu);
-        assertEquals(test.getRuudukko()[0][2], apum);
+        assertEquals(test.getTaulukko()[0][1], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[0][2], apum);
 
     }
 
     @Test
     public void siirtoOikealle() {
         test.asetaTyhja(1, 1);
-        int apum = test.getRuudukko()[1][2];
+        int apum = test.getTaulukko()[1][2];
         test.siirto(1, 2);
-        assertEquals(test.getRuudukko()[1][2], tyhjaRuutu);
-        assertEquals(test.getRuudukko()[1][1], apum);
+        assertEquals(test.getTaulukko()[1][2], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[1][1], apum);
 
     }
 
     @Test
     public void siirtoAlas() {
         test.asetaTyhja(1, 1);
-        int apum = test.getRuudukko()[2][1];
+        int apum = test.getTaulukko()[2][1];
         test.siirto(2, 1);
-        assertEquals(test.getRuudukko()[2][1], tyhjaRuutu);
-        assertEquals(test.getRuudukko()[1][1], apum);
+        assertEquals(test.getTaulukko()[2][1], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[1][1], apum);
 
     }
 
     @Test
     public void siirtoYlos() {
         test.asetaTyhja(1, 1);
-        int apum = test.getRuudukko()[0][1];
+        int apum = test.getTaulukko()[0][1];
         test.siirto(0, 1);
-        assertEquals(test.getRuudukko()[0][1], tyhjaRuutu);
-        assertEquals(test.getRuudukko()[1][1], apum);
+        assertEquals(test.getTaulukko()[0][1], tyhjaRuutu);
+        assertEquals(test.getTaulukko()[1][1], apum);
 
     }
 
@@ -137,7 +137,7 @@ public class RuudukkoTest {
     public void sekoitusSekoittaaJotain() {
         Ruudukko temp = test;
         test.sekoitaRuudukko();
-        assertSame(test.getRuudukko(), temp.getRuudukko());
+        assertSame(test.getTaulukko(), temp.getTaulukko());
     }
 
     @Test

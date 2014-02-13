@@ -2,7 +2,7 @@ package ohjelma.ohha;
 
 /**
  *  Rajapinta jonka toteuttavat erilaiset käyttöliittymät
- * @author WidestM
+ * @author Mikael Wide
  */
 public interface Kayttoliittyma {
 

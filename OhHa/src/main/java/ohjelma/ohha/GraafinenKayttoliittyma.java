@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author WidestM
+ * @author Mikael Wide
  */
 public class GraafinenKayttoliittyma extends JPanel implements Kayttoliittyma, MouseListener {
 

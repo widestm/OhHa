@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  *
- * @author WidestM
+ * @author Mikael Wide
  */
 public class Ruudukko {
 
@@ -12,7 +12,7 @@ public class Ruudukko {
     private final int leveys;
     private int tyhjaRivi;
     private int tyhjaSarake;
-    private int[][] ruudukko;
+    private int[][] taulukko;
     private Random random;
     private int taulukonViimeinen;
 
@@ -32,8 +32,8 @@ public class Ruudukko {
         this.taulukonViimeinen = korkeus * leveys;
     }
 
-    public int[][] getRuudukko() {
-        return ruudukko;
+    public int[][] getTaulukko() {
+        return taulukko;
     }
 
     public int getKorkeus() {
@@ -57,10 +57,10 @@ public class Ruudukko {
      */
     public void taytaRuudukko() {
         int n = 1;
-        ruudukko = new int[korkeus][leveys];
+        taulukko = new int[korkeus][leveys];
         for (int sarake = 0; sarake < korkeus; sarake++) {
             for (int rivi = 0; rivi < leveys; rivi++) {
-                ruudukko[sarake][rivi] = n;
+                taulukko[sarake][rivi] = n;
                 n++;
             }
         }
@@ -69,9 +69,9 @@ public class Ruudukko {
     @Override
     public String toString() {
         String tulostus = "";
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko[0].length; j++) {
-                tulostus += ruudukko[i][j] + " ";
+        for (int i = 0; i < taulukko.length; i++) {
+            for (int j = 0; j < taulukko[0].length; j++) {
+                tulostus += taulukko[i][j] + " ";
             }
             tulostus += "\n";
         }
@@ -99,12 +99,12 @@ public class Ruudukko {
      */
     public void asetaTyhja() {
         int temp;
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko[0].length; j++) {
-                if (ruudukko[i][j] == taulukonViimeinen) {
-                    temp = ruudukko[i][j];
-                    ruudukko[i][j] = ruudukko[tyhjaRivi][tyhjaSarake];
-                    ruudukko[tyhjaRivi][tyhjaSarake] = temp;
+        for (int i = 0; i < taulukko.length; i++) {
+            for (int j = 0; j < taulukko[0].length; j++) {
+                if (taulukko[i][j] == taulukonViimeinen) {
+                    temp = taulukko[i][j];
+                    taulukko[i][j] = taulukko[tyhjaRivi][tyhjaSarake];
+                    taulukko[tyhjaRivi][tyhjaSarake] = temp;
                     break;
                 }
             }
@@ -115,13 +115,13 @@ public class Ruudukko {
      * Sekoittaa ruukudon luvut
      */
     public void sekoitaRuudukko() {
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko[0].length; j++) {
-                int temp = ruudukko[i][j];
+        for (int i = 0; i < taulukko.length; i++) {
+            for (int j = 0; j < taulukko[0].length; j++) {
+                int temp = taulukko[i][j];
                 int arvottuRivi = random.nextInt(korkeus);
                 int arvottuSarake = random.nextInt(leveys);
-                ruudukko[i][j] = ruudukko[arvottuRivi][arvottuSarake];
-                ruudukko[arvottuRivi][arvottuSarake] = temp;
+                taulukko[i][j] = taulukko[arvottuRivi][arvottuSarake];
+                taulukko[arvottuRivi][arvottuSarake] = temp;
             }
         }
     }
@@ -141,29 +141,29 @@ public class Ruudukko {
 
         while (true) {
 //            System.out.println("verrattava: " + y + ", " + x);            //debugrivi
-            verrattava = ruudukko[y][x];
+            verrattava = taulukko[y][x];
             x++;
-            if (x > ruudukko[0].length - 1) {
+            if (x > taulukko[0].length - 1) {
                 y++;
-                if (y > ruudukko.length - 1) {
+                if (y > taulukko.length - 1) {
                     break;
                 }
                 x = 0;
             }
-            for (int i = y; i < ruudukko.length; i++) {
+            for (int i = y; i < taulukko.length; i++) {
 
                 if (i == y) {
-                    for (int j = x; j < ruudukko[0].length; j++) {
+                    for (int j = x; j < taulukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);                //debug
-                        if (ruudukko[i][j] < verrattava && ruudukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
+                        if (taulukko[i][j] < verrattava && taulukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
                     }
                 } else {
-                    for (int j = 0; j < ruudukko[0].length; j++) {
+                    for (int j = 0; j < taulukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);               //debug
-                        if (ruudukko[i][j] < verrattava && ruudukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
+                        if (taulukko[i][j] < verrattava && taulukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
 
                         }
@@ -191,23 +191,23 @@ public class Ruudukko {
         boolean onnistuiko = false;
         int uusiRivi = rivi;
         int uusiSarake = sarake;
-        if (rivi > 0 && ruudukko[rivi - 1][sarake] == taulukonViimeinen) {                     //ylhäälle siirto            
+        if (rivi > 0 && taulukko[rivi - 1][sarake] == taulukonViimeinen) {                     //ylhäälle siirto            
             onnistuiko=true;
             uusiRivi--;
-        } else if (rivi < (korkeus - 1) && ruudukko[rivi + 1][sarake] == taulukonViimeinen) {  //alhaalle
+        } else if (rivi < (korkeus - 1) && taulukko[rivi + 1][sarake] == taulukonViimeinen) {  //alhaalle
             onnistuiko=true;
             uusiRivi++;
-        } else if (sarake > 0 && ruudukko[rivi][sarake - 1] == taulukonViimeinen) {              //vasempaan
+        } else if (sarake > 0 && taulukko[rivi][sarake - 1] == taulukonViimeinen) {              //vasempaan
             onnistuiko=true;
             uusiSarake--;
-        } else if (sarake < leveys - 1 && ruudukko[rivi][sarake + 1] == taulukonViimeinen) {     //oikealle
+        } else if (sarake < leveys - 1 && taulukko[rivi][sarake + 1] == taulukonViimeinen) {     //oikealle
             onnistuiko=true;
             uusiSarake++;
         }
 
-        int temp = ruudukko[rivi][sarake];
-        ruudukko[rivi][sarake] = ruudukko[uusiRivi][uusiSarake];
-        ruudukko[uusiRivi][uusiSarake] = temp;
+        int temp = taulukko[rivi][sarake];
+        taulukko[rivi][sarake] = taulukko[uusiRivi][uusiSarake];
+        taulukko[uusiRivi][uusiSarake] = temp;
         this.tyhjaRivi = rivi;
         this.tyhjaSarake = sarake;
         return onnistuiko;
@@ -216,9 +216,9 @@ public class Ruudukko {
     public boolean ratkaistu() {
         boolean palautus = true;
         int apu = 1;
-        for (int i = 0; i < ruudukko.length; i++) {
-            for (int j = 0; j < ruudukko[0].length; j++) {
-                if (ruudukko[i][j] != apu) {
+        for (int i = 0; i < taulukko.length; i++) {
+            for (int j = 0; j < taulukko[0].length; j++) {
+                if (taulukko[i][j] != apu) {
                     palautus = false;
                 }
                 apu++;

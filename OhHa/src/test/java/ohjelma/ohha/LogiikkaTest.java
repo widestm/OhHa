@@ -40,17 +40,17 @@ public class LogiikkaTest {
     }
     @Test
     public void alustaaRatkaistavanRuudukon(){
-        logi.kaynnista();
+        logi.alusta();
         assertEquals(true, logi.getRuudukko().onkoRatkaistavissa());
     }
     @Test
     public void tyhjaMerkkiOikeassaKohdassa() {
-        logi.kaynnista();
-        assertEquals(16, logi.getRuudukko().getRuudukko()[3][0]);
+        logi.alusta();
+        assertEquals(16, logi.getRuudukko().getTaulukko()[3][0]);
 }
     @Test
     public void siirrotLasketaanOikein(){
-        logi.kaynnista();
+        logi.alusta();
         logi.siirra(3, 1);
         logi.siirra(0, 0);
         logi.siirra(1, 0);
@@ -63,7 +63,7 @@ public class LogiikkaTest {
     @Test
     public void aikaaLasketaan(){
         logi.aloitaAjastus();
-        logi.kaynnista();
+        logi.alusta();
         logi.lopetaAjastus();
         assertNotSame(0, logi.aikaaKaytetty());
     }

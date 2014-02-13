@@ -3,7 +3,7 @@ package ohjelma.ohha;
 
 /**
  *
- * @author WidestM
+ * @author Mikael Wide
  */
 public class Logiikka {
 
@@ -21,10 +21,10 @@ public class Logiikka {
 
     }
     /**
-     * Metodi luo ruudukon alustaa sen, testaa ratkaistavuuden, pyörittää
+     * Metodi luo ruudukon ja alustaa sen, testaa ratkaistavuuden, pyörittää
      * looppia kunnes pelilauta on ratkaistavaa muotoa
      */
-    public void kaynnista() {
+    public void alusta() {
         r.taytaRuudukko();
 
         while (true) {
@@ -73,11 +73,13 @@ public class Logiikka {
      * @param rivi      Siirrettävän ruudun rivi
      * @param sarake    Siirettävän ruudun sarake
      */
-    public void siirra(int rivi, int sarake) {
+    public boolean siirra(int rivi, int sarake) {
+        boolean onnistuiko = false;
         if (r.siirto(rivi, sarake)) {
+            onnistuiko = true;
             siirrot++;
         }
-        
+        return onnistuiko;
     }
 
     @Override
