@@ -38,5 +38,35 @@ public class LogiikkaTest {
     @After
     public void tearDown() {
     }
+    @Test
+    public void alustaaRatkaistavanRuudukon(){
+        logi.kaynnista();
+        assertEquals(true, logi.getRuudukko().onkoRatkaistavissa());
+    }
+    @Test
+    public void tyhjaMerkkiOikeassaKohdassa() {
+        logi.kaynnista();
+        assertEquals(16, logi.getRuudukko().getRuudukko()[3][0]);
+}
+    @Test
+    public void siirrotLasketaanOikein(){
+        logi.kaynnista();
+        logi.siirra(3, 1);
+        logi.siirra(0, 0);
+        logi.siirra(1, 0);
+        logi.siirra(3, 2);
+        logi.siirra(2, 2);
+        logi.siirra(1, 2);
+        logi.siirra(3, 3);
+        assertEquals(4, logi.getSiirrot());
+    }
+    @Test
+    public void aikaaLasketaan(){
+        logi.aloitaAjastus();
+        logi.kaynnista();
+        logi.lopetaAjastus();
+        assertNotSame(0, logi.aikaaKaytetty());
+    }
+    
 
 }

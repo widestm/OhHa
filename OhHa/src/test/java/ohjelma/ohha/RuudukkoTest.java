@@ -144,5 +144,13 @@ public class RuudukkoTest {
     public void inversiotOikeinYhdessaTapauksessa() {
         assertEquals(test.onkoRatkaistavissa(), true);
     }
+    @Test 
+    public void onkoRatkaistu(){
+        test.taytaRuudukko();
+        test.asetaTyhja(3, 1);
+        assertFalse(test.ratkaistu());
+        test.siirto(3, 2);
+        assertTrue(test.ratkaistu());
+    }
 
 }

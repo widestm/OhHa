@@ -20,10 +20,9 @@ public class Logiikka {
         this.r = ruudukko;
 
     }
-
     /**
      * Metodi luo ruudukon alustaa sen, testaa ratkaistavuuden, pyörittää
-     * looppia kunnes siirtojen avulla saadaan ratkaistu taulukko
+     * looppia kunnes pelilauta on ratkaistavaa muotoa
      */
     public void kaynnista() {
         r.taytaRuudukko();
@@ -40,6 +39,9 @@ public class Logiikka {
 
     public int getSiirrot() {
         return siirrot;
+    }
+    public Ruudukko getRuudukko() {
+        return r;
     }
 
     /**
@@ -64,6 +66,13 @@ public class Logiikka {
         return (this.lopetusAika - this.aloitusAika) / 1000;
     }
 
+    /**
+     *  Metodi kutsuu ruudukon siirto()-metodia ja lisää yhden siirron jos metodi palauttaa true 
+     * eli siirto oli laillinen
+     * 
+     * @param rivi      Siirrettävän ruudun rivi
+     * @param sarake    Siirettävän ruudun sarake
+     */
     public void siirra(int rivi, int sarake) {
         if (r.siirto(rivi, sarake)) {
             siirrot++;
@@ -76,7 +85,11 @@ public class Logiikka {
         return r.toString();
     }
 
-    public boolean ratkaistu() {
+    /**
+     *  Pyytää ruudukon ratkaistu()-metodia ja palauttaa true jos peli on raktaistu eli oikeassa järjestyksessä
+     * @return
+     */
+    public boolean kaynnissa() {
         if (r.ratkaistu()) {
             return false;
         }

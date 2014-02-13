@@ -9,11 +9,13 @@ import java.util.Scanner;
 public class TekstiKayttoliittyma implements Kayttoliittyma {
 
     private Logiikka logi;
-    private Ruudukko ruudukko;
     private Scanner luk;
 
+    /**
+     *
+     * @param ruudukko Luokka saa mainilta käyttöönsä ruudukon
+     */
     public TekstiKayttoliittyma(Ruudukko ruudukko) {
-        this.ruudukko = ruudukko;
         this.logi = new Logiikka(ruudukko);
         this.luk = new Scanner(System.in);
 
@@ -24,6 +26,10 @@ public class TekstiKayttoliittyma implements Kayttoliittyma {
         logi.siirra(rivi, sarake);
     }
 
+    /**
+     *  Käskytetään logiikkaa ja tulostetaan sopivaksi koettua kamaa.
+     * 
+     */
     public void kaynnista() {
         logi.kaynnista();
 
@@ -34,7 +40,7 @@ public class TekstiKayttoliittyma implements Kayttoliittyma {
         System.out.println("Jos ruudun vieressä on tyhjä ruutu se siirretään sen tilalle\n");
         
         logi.aloitaAjastus();
-        while (logi.ratkaistu()) {
+        while (logi.kaynnissa()) {
             System.out.println("Anna rivi: ");
             int rivi = Integer.parseInt(luk.nextLine());
             System.out.println("Anna sarake: ");
