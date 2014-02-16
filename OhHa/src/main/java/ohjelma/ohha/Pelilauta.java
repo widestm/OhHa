@@ -30,7 +30,7 @@ public class Pelilauta extends JPanel implements MouseListener{
         super.paintComponent(g);
 
         int[][] taulu = logic.getRuudukko().getTaulukko();
-        if (!logic.kaynnissa()) {
+        if (logic.kaynnissa()) {
             for (int i = 0; i < taulu.length; i++) {
                 for (int j = 0; j < taulu[0].length; j++) {
                     int x = j * ruudunKoko;
