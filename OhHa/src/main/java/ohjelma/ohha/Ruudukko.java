@@ -186,6 +186,7 @@ public class Ruudukko {
      *
      * @param rivi Siirrettävän ruudun rivi
      * @param sarake Siirrettävän ruudun sarake
+     * @return Palauttaa true jos siirto oli suoritettavissa ja se tehtiin
      */
     public boolean siirto(int rivi, int sarake) {                                          //siirto osoittamalla ruutua jota halutaan siirtää ja testaataan onko sallittu
         boolean onnistuiko = false;
@@ -213,6 +214,11 @@ public class Ruudukko {
         return onnistuiko;
     }
 
+    /**
+     *  Metodi testaa ovatko luvut ruudukossa järjestyksessä
+     *
+     * @return Palauttaa true jos luvut ovat ratkaistu eli peli on loppu
+     */
     public boolean ratkaistu() {
         boolean palautus = true;
         int apu = 1;
