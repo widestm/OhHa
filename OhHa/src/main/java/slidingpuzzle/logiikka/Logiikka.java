@@ -1,6 +1,5 @@
 package slidingpuzzle.logiikka;
 
-
 /**
  *
  * @author Mikael Wide
@@ -20,9 +19,10 @@ public class Logiikka {
         this.r = ruudukko;
 
     }
+
     /**
      * Metodi luo ruudukon ja alustaa sen, testaa ratkaistavuuden, pyörittää
-     * looppia kunnes pelilauta on ratkaistavaa muotoa
+     * looppia kunnes pelilauta on ratkaistavaa muotoa tai siten että peli ei ole valmiiksi ratkaistu
      */
     public void alusta() {
         r.taytaRuudukko();
@@ -30,7 +30,7 @@ public class Logiikka {
         while (true) {
             r.sekoitaRuudukko();
             r.asetaTyhja();
-            if (r.onkoRatkaistavissa()) {
+            if (r.onkoRatkaistavissa() && !r.ratkaistu()) {
                 break;
             }
         }
@@ -40,6 +40,7 @@ public class Logiikka {
     public int getSiirrot() {
         return siirrot;
     }
+
     public Ruudukko getRuudukko() {
         return r;
     }
@@ -67,11 +68,11 @@ public class Logiikka {
     }
 
     /**
-     *  Metodi kutsuu ruudukon siirto()-metodia ja lisää yhden siirron jos metodi palauttaa true 
-     * eli siirto oli laillinen
-     * 
-     * @param rivi      Siirrettävän ruudun rivi
-     * @param sarake    Siirettävän ruudun sarake
+     * Metodi kutsuu ruudukon siirto()-metodia ja lisää yhden siirron jos metodi
+     * palauttaa true eli siirto oli laillinen
+     *
+     * @param rivi Siirrettävän ruudun rivi
+     * @param sarake Siirettävän ruudun sarake
      */
     public boolean siirra(int rivi, int sarake) {
         boolean onnistuiko = false;
@@ -88,7 +89,9 @@ public class Logiikka {
     }
 
     /**
-     *  Pyytää ruudukon ratkaistu()-metodia ja palauttaa true jos peli on raktaistu eli oikeassa järjestyksessä
+     * Pyytää ruudukon ratkaistu()-metodia ja palauttaa true jos peli on
+     * raktaistu eli oikeassa järjestyksessä
+     *
      * @return
      */
     public boolean kaynnissa() {

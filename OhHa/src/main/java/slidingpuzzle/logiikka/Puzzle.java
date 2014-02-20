@@ -24,8 +24,8 @@ public class Puzzle {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Pelilauta peli = new Pelilauta();
         window.setContentPane(peli);
-        window.pack();  // finalize layout
-        window.show();  // make window visible
+        window.pack();  
+        window.show();
         window.setResizable(true);
     }
 

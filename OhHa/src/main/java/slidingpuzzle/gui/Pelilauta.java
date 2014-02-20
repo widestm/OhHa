@@ -6,25 +6,33 @@ import java.util.*;
 import javax.swing.*;
 import slidingpuzzle.logiikka.Logiikka;
 import slidingpuzzle.logiikka.Ruudukko;
+import java.awt.Image.*;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
 
 /**
  *
  * @author Mikael Wide
  */
-public class Pelilauta extends JPanel implements MouseListener{
+public class Pelilauta extends JPanel implements MouseListener {
 
     private static Logiikka logic;
     private final int ruudunKoko;
+    private Image kuva;
+    private ImageIcon sid;
 
     public Pelilauta() {
-        logic = new Logiikka(new Ruudukko(3, 3, 2, new Random().nextInt(3)));
-        logic.alusta();
+        this.logic = new Logiikka(new Ruudukko(4, 4, 3, new Random().nextInt(4)));
+        this.logic.alusta();
         this.ruudunKoko = 100;
         this.setPreferredSize(
-                new Dimension(logic.getRuudukko().getLeveys() * ruudunKoko + 150, logic.getRuudukko().getKorkeus() * ruudunKoko + 150));
+                new Dimension(logic.getRuudukko().getLeveys() * ruudunKoko, logic.getRuudukko().getKorkeus() * ruudunKoko));
         this.setBackground(Color.DARK_GRAY);
         this.addMouseListener(this);
-        logic.aloitaAjastus();
+        this.logic.aloitaAjastus();
+        this.sid = new ImageIcon(Pelilauta.class.getResource("/images/sidthekid.jpg"));
+        this.kuva = sid.getImage();
+
     }
 
     @Override
@@ -46,23 +54,16 @@ public class Pelilauta extends JPanel implements MouseListener{
                     } else {
                         g.setColor(Color.black);
                         g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
-                        g.setColor(Color.GREEN);
-                        g.setFont(new Font("SansSerif", Font.BOLD, ruudunKoko / 2));
-                        g.drawString("", x + 30, y + (3 * ruudunKoko) / 4);
                     }
                 }
-
             }
         } else {
             logic.lopetaAjastus();
             g.setColor(Color.white);
             g.fillRect(0, 0, 500, 500);
             g.setColor(Color.black);
-//            String teksti = "" + logic.getSiirrot() + " siirtoa ja  " + logic.aikaaKaytetty() + "s";
-//            String teksti2 = "JUMALAUTA SÄ LÄPÄSIT PELIN!\2 SIIHEN MENI VAAN " + logic.getSiirrot()
-//                    + " SIIRTOA JA " + logic.aikaaKaytetty() + "s";
             g.setFont(new Font("SansSerif", Font.BOLD, 20));
-            g.drawString("JUMALAUTA SÄ LÄPÄSIT PELIN!", 0, 50);
+            g.drawString("Voitit PELIN!", 0, 50);
             g.drawString("SIIHEN MENI VAAN " + logic.getSiirrot() + " SIIRTOA", 0, 70);
             g.drawString("JA " + logic.aikaaKaytetty() + "s", 0, 90);
         }
@@ -98,3 +99,20 @@ public class Pelilauta extends JPanel implements MouseListener{
     }
 
 }
+
+//        int[][] taulu = logic.getRuudukko().getTaulukko();
+//        if (logic.kaynnissa()) {
+//            for (int i = 0; i < taulu.length; i++) {
+//                for (int j = 0; j < taulu[0].length; j++) {
+//                    int x = j * ruudunKoko;
+//                    int y = i * ruudunKoko;
+//                    if (taulu[i][j] != taulu[0].length * taulu.length) {
+//                        kuva = createImage(new FilteredImageSource(sid.getImage().getSource(),
+//                                new CropImageFilter(x, y, 100, 100)));
+//                        g.drawImage(kuva, x, y, this);
+//                    } else {
+//                        g.setColor(Color.black);
+//                        g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
+//                    }
+//                }
+//            }
