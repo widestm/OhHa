@@ -29,10 +29,10 @@ public class KuvanKasittelija extends JPanel {
         this.sarakeMaara = sarakeMaara;
         this.riviMaara = riviMaara;
         this.ruudunKoko = ruudunKoko;
+        this.palat = new HashMap<>();
         this.temp = new ImageIcon(KuvanKasittelija.class.getResource(source));
         this.skaalaaKuva();
         this.hajotaKuva();
-        this.palat = new HashMap<>();
 
     }
 
@@ -55,7 +55,10 @@ public class KuvanKasittelija extends JPanel {
 
     public void skaalaaKuva() {
         if (temp.getIconHeight() != pelinKorkeus && temp.getIconWidth() != pelinLeveys) {
-            lahde = new ImageIcon(temp.getImage().getScaledInstance(pelinLeveys, pelinKorkeus, Image.SCALE_DEFAULT));
+            lahde = new ImageIcon(temp.getImage().getScaledInstance(pelinLeveys, pelinKorkeus, Image.SCALE_SMOOTH));
         }
+    }
+    public Image haeAlkuperainen(){
+        return this.lahde.getImage();
     }
 }

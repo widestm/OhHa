@@ -7,9 +7,6 @@ import javax.swing.*;
 import slidingpuzzle.logiikka.Logiikka;
 import slidingpuzzle.logiikka.Ruudukko;
 import java.awt.Image.*;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-
 /**
  *
  * @author Mikael Wide
@@ -18,16 +15,16 @@ public class Pelilauta extends JPanel implements MouseListener {
 
     private static Logiikka logic;
     private final int ruudunSivu;
-    private KuvanKasittelija kuvaLuokka;
+    private final KuvanKasittelija kuvaLuokka;
     private final int pelinKorkeus;
     private final int pelinLeveys;
-    private int sarakeMaara;
-    private int riviMaara;
+    private final int sarakeMaara;
+    private final int riviMaara;
 
     public Pelilauta() {
-        this.sarakeMaara = 3;
-        this.riviMaara = 3;
-        this.logic = new Logiikka(new Ruudukko(riviMaara, sarakeMaara, 2, new Random().nextInt(3)));
+        this.sarakeMaara = 5;
+        this.riviMaara = 5;
+        this.logic = new Logiikka(new Ruudukko(riviMaara, sarakeMaara, riviMaara-1, new Random().nextInt(riviMaara)));
         this.logic.alusta();
         this.ruudunSivu = 100;
         this.pelinKorkeus = logic.getRuudukko().getKorkeus() * ruudunSivu;
@@ -37,7 +34,7 @@ public class Pelilauta extends JPanel implements MouseListener {
         this.setBackground(Color.DARK_GRAY);
         this.addMouseListener(this);
         this.logic.aloitaAjastus();
-        this.kuvaLuokka = new KuvanKasittelija("/images/sid2.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+        this.kuvaLuokka = new KuvanKasittelija("/images/hoppsankerstin.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
 
     }
 
@@ -56,7 +53,7 @@ public class Pelilauta extends JPanel implements MouseListener {
 
                     } else {
                         g.setColor(Color.black);
-                        g.fillRect(x + 2, y + 2, ruudunSivu - 5, ruudunSivu - 5);
+                        g.fillRect(x, y, ruudunSivu, ruudunSivu);
                     }
                     
                 }
@@ -65,7 +62,7 @@ public class Pelilauta extends JPanel implements MouseListener {
         } else {
             logic.lopetaAjastus();
             g.setColor(Color.white);
-            g.fillRect(0, 0, 500, 500);
+            g.drawImage(kuvaLuokka.haeAlkuperainen(), 0, 0, this);
             g.setColor(Color.black);
             g.setFont(new Font("SansSerif", Font.BOLD, 20));
             g.drawString("Voitit PELIN!", 0, 50);
