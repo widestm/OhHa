@@ -17,21 +17,27 @@ import java.awt.image.FilteredImageSource;
 public class Pelilauta extends JPanel implements MouseListener {
 
     private static Logiikka logic;
-    private final int ruudunKoko;
-    private Image kuva;
-    private ImageIcon sid;
+    private final int ruudunSivu;
+    private KuvanKasittelija kuvaLuokka;
+    private final int pelinKorkeus;
+    private final int pelinLeveys;
+    private int sarakeMaara;
+    private int riviMaara;
 
     public Pelilauta() {
-        this.logic = new Logiikka(new Ruudukko(4, 4, 3, new Random().nextInt(4)));
+        this.sarakeMaara = 3;
+        this.riviMaara = 3;
+        this.logic = new Logiikka(new Ruudukko(riviMaara, sarakeMaara, 2, new Random().nextInt(3)));
         this.logic.alusta();
-        this.ruudunKoko = 100;
+        this.ruudunSivu = 100;
+        this.pelinKorkeus = logic.getRuudukko().getKorkeus() * ruudunSivu;
+        this.pelinLeveys = logic.getRuudukko().getLeveys() * ruudunSivu;
         this.setPreferredSize(
-                new Dimension(logic.getRuudukko().getLeveys() * ruudunKoko, logic.getRuudukko().getKorkeus() * ruudunKoko));
+                new Dimension(pelinLeveys, pelinKorkeus));
         this.setBackground(Color.DARK_GRAY);
         this.addMouseListener(this);
         this.logic.aloitaAjastus();
-        this.sid = new ImageIcon(Pelilauta.class.getResource("/images/sidthekid.jpg"));
-        this.kuva = sid.getImage();
+        this.kuvaLuokka = new KuvanKasittelija("/images/sid2.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
 
     }
 
@@ -43,20 +49,19 @@ public class Pelilauta extends JPanel implements MouseListener {
         if (logic.kaynnissa()) {
             for (int i = 0; i < taulu.length; i++) {
                 for (int j = 0; j < taulu[0].length; j++) {
-                    int x = j * ruudunKoko;
-                    int y = i * ruudunKoko;
+                    int x = j * ruudunSivu;
+                    int y = i * ruudunSivu;
                     if (taulu[i][j] != taulu[0].length * taulu.length) {
-                        g.setColor(Color.black);
-                        g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
-                        g.setColor(Color.GREEN);
-                        g.setFont(new Font("SansSerif", Font.BOLD, ruudunKoko / 2));
-                        g.drawString("" + taulu[i][j], x + 30, y + (3 * ruudunKoko) / 4);
+                        g.drawImage(kuvaLuokka.haePala(taulu[i][j]), x, y, this);
+
                     } else {
                         g.setColor(Color.black);
-                        g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
+                        g.fillRect(x + 2, y + 2, ruudunSivu - 5, ruudunSivu - 5);
                     }
+                    
                 }
             }
+
         } else {
             logic.lopetaAjastus();
             g.setColor(Color.white);
@@ -76,8 +81,8 @@ public class Pelilauta extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (logic.kaynnissa()) {
-            int rivi = e.getY() / ruudunKoko;
-            int sarake = e.getX() / ruudunKoko;
+            int rivi = e.getY() / ruudunSivu;
+            int sarake = e.getX() / ruudunSivu;
 
             if (!logic.siirra(rivi, sarake)) {
                 Toolkit.getDefaultToolkit().beep();
@@ -99,7 +104,6 @@ public class Pelilauta extends JPanel implements MouseListener {
     }
 
 }
-
 //        int[][] taulu = logic.getRuudukko().getTaulukko();
 //        if (logic.kaynnissa()) {
 //            for (int i = 0; i < taulu.length; i++) {
@@ -107,9 +111,11 @@ public class Pelilauta extends JPanel implements MouseListener {
 //                    int x = j * ruudunKoko;
 //                    int y = i * ruudunKoko;
 //                    if (taulu[i][j] != taulu[0].length * taulu.length) {
-//                        kuva = createImage(new FilteredImageSource(sid.getImage().getSource(),
-//                                new CropImageFilter(x, y, 100, 100)));
-//                        g.drawImage(kuva, x, y, this);
+//                        g.setColor(Color.black);
+//                        g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
+//                        g.setColor(Color.GREEN);
+//                        g.setFont(new Font("SansSerif", Font.BOLD, ruudunKoko / 2));
+//                        g.drawString("" + taulu[i][j], x + 30, y + (3 * ruudunKoko) / 4);
 //                    } else {
 //                        g.setColor(Color.black);
 //                        g.fillRect(x + 2, y + 2, ruudunKoko - 5, ruudunKoko - 5);
