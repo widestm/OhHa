@@ -34,7 +34,7 @@ public class Pelilauta extends JPanel implements MouseListener {
         this.setBackground(Color.DARK_GRAY);
         this.addMouseListener(this);
         this.logic.aloitaAjastus();
-        this.kuvaLuokka = new KuvanKasittelija("/images/hoppsankerstin.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+        this.kuvaLuokka = new KuvanKasittelija("/images/sid2.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
 
     }
 
