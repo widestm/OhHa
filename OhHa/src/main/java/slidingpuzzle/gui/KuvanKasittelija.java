@@ -9,7 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- * Kuvankäsittelijä skaalaa saamansa kuvan oikeaan kokoon ja jakaa sen oikean kokoisiksi paloiksi
+ * Kuvankäsittelijä skaalaa saamansa kuvan oikeaan kokoon ja jakaa sen oikean
+ * kokoisiksi paloiksi
+ *
  * @author Mikael Wide
  */
 public class KuvanKasittelija extends JPanel {
@@ -26,7 +28,7 @@ public class KuvanKasittelija extends JPanel {
     /**
      *
      * @param source Polku käytettävälle kuvalle
-     * @param leveys Pelille asetettu leveys    
+     * @param leveys Pelille asetettu leveys
      * @param korkeus Pelille asetettu korkeus
      * @param riviMaara Pelin rivimäärä
      * @param sarakeMaara Pelin sarakemäärä
@@ -42,11 +44,11 @@ public class KuvanKasittelija extends JPanel {
         this.temp = new ImageIcon(KuvanKasittelija.class.getResource(source));
         this.skaalaaKuva();
         this.hajotaKuva();
-
     }
 
     /**
-     *  hajotaKuva() jakaa kuvan oikean kokoisiin paloihin ja lisää ne hashMappiin avaimena 1-n jossa n on ruudukossa olevien alkioden määrä
+     * hajotaKuva() jakaa kuvan oikean kokoisiin paloihin ja lisää ne
+     * hashMappiin avaimena 1-n jossa n on ruudukossa olevien alkioden määrä
      */
     public void hajotaKuva() {
         int n = 1;
@@ -62,17 +64,18 @@ public class KuvanKasittelija extends JPanel {
     }
 
     /**
-     *  Metodin avulla voi hakea kuvapalaa
-     * 
+     * Metodin avulla voi hakea kuvapalaa
+     *
      * @param palaNro Joku ruudukossa oleva arvo
-     * @return  Palauttaa kuvan
+     * @return Palauttaa kuvan
      */
     public Image haePala(int palaNro) {
         return this.palat.get(palaNro);
     }
 
     /**
-     *  Metodi skaalaa kuvan oikean kokoiseksi riippuen minkä kokoista pelilautaa käytetään
+     * Metodi skaalaa kuvan oikean kokoiseksi riippuen minkä kokoista pelilautaa
+     * käytetään
      */
     public void skaalaaKuva() {
         if (temp.getIconHeight() != pelinKorkeus && temp.getIconWidth() != pelinLeveys) {
@@ -86,5 +89,10 @@ public class KuvanKasittelija extends JPanel {
      */
     public Image haeAlkuperainen() {
         return this.lahde.getImage();
+    }
+
+    public ImageIcon haeAlkuperainenThumbnail() {
+        ImageIcon kuva = new ImageIcon(temp.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        return kuva;
     }
 }

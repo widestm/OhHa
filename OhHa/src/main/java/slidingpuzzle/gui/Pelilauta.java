@@ -18,11 +18,16 @@ public class Pelilauta extends JPanel implements MouseListener {
 
     private static Logiikka logic;
     private final int ruudunSivu;
-    private final KuvanKasittelija kuvaLuokka;
+    private KuvanKasittelija valittuKuva;
     private final int pelinKorkeus;
     private final int pelinLeveys;
     private final int sarakeMaara;
     private final int riviMaara;
+    private KuvanKasittelija kuva1;
+    private KuvanKasittelija kuva2;
+    private KuvanKasittelija kuva3;
+    private KuvanKasittelija tyhja;
+    private ImageIcon tyhjaKuva;
 
     public Pelilauta() {
         this.sarakeMaara = 4;
@@ -34,10 +39,12 @@ public class Pelilauta extends JPanel implements MouseListener {
         this.pelinLeveys = sarakeMaara * ruudunSivu;
         this.setPreferredSize(
                 new Dimension(pelinLeveys, pelinKorkeus));
-        this.setBackground(Color.DARK_GRAY);
+        this.setBackground(Color.black);
         this.addMouseListener(this);
+        this.alustaKuvat();
+
         this.logic.aloitaAjastus();
-        this.kuvaLuokka = new KuvanKasittelija("/images/sid2.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+
     }
 
     @Override
@@ -50,17 +57,17 @@ public class Pelilauta extends JPanel implements MouseListener {
                     int x = j * ruudunSivu;
                     int y = i * ruudunSivu;
                     if (taulu[i][j] != taulu[0].length * taulu.length) {
-                        g.drawImage(kuvaLuokka.haePala(taulu[i][j]), x, y, this);
+                        g.drawImage(valittuKuva.haePala(taulu[i][j]), x, y, this);
                     } else {
-                        g.setColor(Color.black);
-                        g.fillRect(x, y, ruudunSivu, ruudunSivu);
+                        g.drawImage(tyhja.haePala(1), x, y, this);
+
                     }
                 }
             }
         } else {
             logic.lopetaAjastus();
             g.setColor(Color.white);
-            g.drawImage(kuvaLuokka.haeAlkuperainen(), 0, 0, this);
+            g.drawImage(valittuKuva.haeAlkuperainen(), 0, 0, this);
             g.setColor(Color.white);
             g.setFont(new Font("SansSerif", Font.BOLD, 20));
             g.drawString("Voitit pelin!", 0, 50);
@@ -98,7 +105,47 @@ public class Pelilauta extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
 
+    public void kuvanValitsin(int n) {
+        if (n == 1) {
+            this.valittuKuva = kuva1;
+        } else if (n == 2) {
+            this.valittuKuva = kuva2;
+        } else if (n == 3) {
+            this.valittuKuva = kuva3;
+        }
+
+    }
+
+    public void alustaKuvat() {
+        this.kuva1 = new KuvanKasittelija("/images/sidthekid.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+        this.kuva2 = new KuvanKasittelija("/images/minions.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+        this.kuva3 = new KuvanKasittelija("/images/swimmingsid.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
+        this.tyhja = new KuvanKasittelija("/images/empty.png", ruudunSivu, ruudunSivu, 1, 1, ruudunSivu);
+        this.valittuKuva = kuva1;
+    }
+
+    public ImageIcon haeThumbnail(int n) {
+        if (n == 1) {
+            return kuva1.haeAlkuperainenThumbnail();
+        } else if (n == 2) {
+            return kuva2.haeAlkuperainenThumbnail();
+        }
+        return kuva3.haeAlkuperainenThumbnail();
+    }
+
+    public int getPelinKorkeus() {
+        return pelinKorkeus;
+    }
+
+    public int getPelinLeveys() {
+        return pelinLeveys;
+    }
+
 }
+
+//          Tässä ylimääräinen koodipätkä jolla peliä voi pelata pelkillä numeroilla
+//          
+//
 //        int[][] taulu = logic.getRuudukko().getTaulukko();
 //        if (logic.kaynnissa()) {
 //            for (int i = 0; i < taulu.length; i++) {
