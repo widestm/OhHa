@@ -14,14 +14,15 @@ Ohha harjoitustyö tuntidokumentaatio
 
 30.1.2014 : 2h Inversioiden laskumetodi toimii, lisätty paljon testejä ruudukolle. Koodia myös refaktoroitu puolin ja toisin.
 
-4.2.2014 : 3h Lisätty logiikka ja siihen käynnistä() metodi joka pyörittää ohjelmaa niin kuin pitääkin. Saatananmoista tappelua saada javadoc toimimaan mavenissa(MIKSI EI OHJETTA KURSSIN SIVUILLA???). Onneksi on viisaampia ihmisiä jotka auttaa. Javadoc kirjoitettu Ruudukolle.
+4.2.2014 : 3h Lisätty logiikka ja siihen käynnistä() metodi joka pyörittää ohjelmaa niin kuin pitääkin. Saatananmoista tappelua saada javadoc toimimaan mavenissa. Onneksi on viisaampia ihmisiä jotka auttaa. Javadoc kirjoitettu Ruudukolle.
 
-5.2.2014 : 2h Tehty vähän Logiikka luokka ja suunniteltu rakennetta käyttöliittymille jne.
+5.2.2014 : 2h Tehty vähän Logiikka-luokkaa ja suunniteltu rakennetta käyttöliittymille jne.
 Luokkakaaviota päivitelty hieman.
 
 11.2.2014: 2h Luokkakaaviota muokattu,logiikka kokonaan valmis. Graafista käyttöliittymää ihmetelty.
 
 13.2.2014: 3h Käyttöliittymää värkätty kasaan, itse pelilauta toimii jo, sen ympäriltä vaan puuttuu kaikki järkevä toiminnalisuus.
 
+13-28.2.2014 : +10h säätöä ja dokumentaatiota 
 
-Yht tähän mennessä: n. 17h
+Yht tähän mennessä: n. 30h

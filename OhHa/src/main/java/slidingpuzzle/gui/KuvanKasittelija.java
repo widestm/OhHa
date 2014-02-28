@@ -91,6 +91,10 @@ public class KuvanKasittelija extends JPanel {
         return this.lahde.getImage();
     }
 
+    /**
+     *  
+     * @return Metodi palauttaa alkuperäisestä kuvasta pienen thumbnailin
+     */
     public ImageIcon haeAlkuperainenThumbnail() {
         ImageIcon kuva = new ImageIcon(temp.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
         return kuva;

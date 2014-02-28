@@ -1,0 +1,5 @@
+Hei ja onnittelut!
+Sinä olet juuri valinnut pelata slidingpuzzlea. Tämä on klassisen 15-puzzlen yksi versio.
+Pelin alussa voit valita kuvan jolla haluat pelata peliä.
+Klikkaa tämän jälkeen “Aloita peli”. Pelissä on siis tarkoitus järjestää pelissä oleva kuva siten että sen järjestys on oikea ja tyhjä ruutu oikeassa alakulmassa.
+Jos et haluakaan pelata klikkaamalla lopeta poistutaan pelistä :)

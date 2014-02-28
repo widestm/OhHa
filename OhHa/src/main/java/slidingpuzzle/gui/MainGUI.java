@@ -21,12 +21,12 @@ public class MainGUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("SLidingPuzz");
-        frame.setPreferredSize(new Dimension(pelilauta.getPelinLeveys(), pelilauta.getPelinKorkeus()+20));
+        frame.setPreferredSize(new Dimension(700, 700));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
-
+        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }

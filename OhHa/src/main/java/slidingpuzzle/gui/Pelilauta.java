@@ -39,12 +39,10 @@ public class Pelilauta extends JPanel implements MouseListener {
         this.pelinLeveys = sarakeMaara * ruudunSivu;
         this.setPreferredSize(
                 new Dimension(pelinLeveys, pelinKorkeus));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.addMouseListener(this);
         this.alustaKuvat();
-
         this.logic.aloitaAjastus();
-
     }
 
     @Override
@@ -93,18 +91,6 @@ public class Pelilauta extends JPanel implements MouseListener {
         }
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
     public void kuvanValitsin(int n) {
         if (n == 1) {
             this.valittuKuva = kuva1;
@@ -141,6 +127,17 @@ public class Pelilauta extends JPanel implements MouseListener {
         return pelinLeveys;
     }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 }
 
 //          Tässä ylimääräinen koodipätkä jolla peliä voi pelata pelkillä numeroilla
