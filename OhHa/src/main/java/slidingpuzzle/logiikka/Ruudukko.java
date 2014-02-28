@@ -138,7 +138,6 @@ public class Ruudukko {
         int x = 0;
         int y = 0;
         int verrattava;
-
         while (true) {
 //            System.out.println("verrattava: " + y + ", " + x);            //debugrivi
             verrattava = taulukko[y][x];
@@ -151,13 +150,11 @@ public class Ruudukko {
                 x = 0;
             }
             for (int i = y; i < taulukko.length; i++) {
-
                 if (i == y) {
                     for (int j = x; j < taulukko[0].length; j++) {
 //                        System.out.println("i: " + i + " j:" + j);                //debug
                         if (taulukko[i][j] < verrattava && taulukko[i][j] != taulukonViimeinen && verrattava != taulukonViimeinen) {
                             inversioita++;
-
                         }
                     }
                 } else {
@@ -175,7 +172,6 @@ public class Ruudukko {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -193,19 +189,18 @@ public class Ruudukko {
         int uusiRivi = rivi;
         int uusiSarake = sarake;
         if (rivi > 0 && taulukko[rivi - 1][sarake] == taulukonViimeinen) {                     //ylhäälle siirto            
-            onnistuiko=true;
+            onnistuiko = true;
             uusiRivi--;
         } else if (rivi < (korkeus - 1) && taulukko[rivi + 1][sarake] == taulukonViimeinen) {  //alhaalle
-            onnistuiko=true;
+            onnistuiko = true;
             uusiRivi++;
         } else if (sarake > 0 && taulukko[rivi][sarake - 1] == taulukonViimeinen) {              //vasempaan
-            onnistuiko=true;
+            onnistuiko = true;
             uusiSarake--;
         } else if (sarake < leveys - 1 && taulukko[rivi][sarake + 1] == taulukonViimeinen) {     //oikealle
-            onnistuiko=true;
+            onnistuiko = true;
             uusiSarake++;
         }
-
         int temp = taulukko[rivi][sarake];
         taulukko[rivi][sarake] = taulukko[uusiRivi][uusiSarake];
         taulukko[uusiRivi][uusiSarake] = temp;
@@ -215,7 +210,7 @@ public class Ruudukko {
     }
 
     /**
-     *  Metodi testaa ovatko luvut ruudukossa järjestyksessä
+     * Metodi testaa ovatko luvut ruudukossa järjestyksessä
      *
      * @return Palauttaa true jos luvut ovat ratkaistu eli peli on loppu
      */
@@ -229,9 +224,7 @@ public class Ruudukko {
                 }
                 apu++;
             }
-
         }
-
         return palautus;
     }
 }

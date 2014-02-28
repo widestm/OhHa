@@ -7,7 +7,10 @@ import javax.swing.*;
 import slidingpuzzle.logiikka.Logiikka;
 import slidingpuzzle.logiikka.Ruudukko;
 import java.awt.Image.*;
+
 /**
+ * Pelilauta alustaa uuden logiikka-olion ja kuvaluokan jossa on annettu kuvan
+ * polku ja kaikki pelilaudan ominaisuudet
  *
  * @author Mikael Wide
  */
@@ -22,26 +25,24 @@ public class Pelilauta extends JPanel implements MouseListener {
     private final int riviMaara;
 
     public Pelilauta() {
-        this.sarakeMaara = 5;
-        this.riviMaara = 5;
-        this.logic = new Logiikka(new Ruudukko(riviMaara, sarakeMaara, riviMaara-1, new Random().nextInt(riviMaara)));
+        this.sarakeMaara = 4;
+        this.riviMaara = 4;
+        this.logic = new Logiikka(new Ruudukko(riviMaara, sarakeMaara, riviMaara - 1, new Random().nextInt(riviMaara)));
         this.logic.alusta();
-        this.ruudunSivu = 100;
-        this.pelinKorkeus = logic.getRuudukko().getKorkeus() * ruudunSivu;
-        this.pelinLeveys = logic.getRuudukko().getLeveys() * ruudunSivu;
+        this.ruudunSivu = 150;
+        this.pelinKorkeus = riviMaara * ruudunSivu;
+        this.pelinLeveys = sarakeMaara * ruudunSivu;
         this.setPreferredSize(
                 new Dimension(pelinLeveys, pelinKorkeus));
         this.setBackground(Color.DARK_GRAY);
         this.addMouseListener(this);
         this.logic.aloitaAjastus();
         this.kuvaLuokka = new KuvanKasittelija("/images/sid2.jpg", pelinLeveys, pelinKorkeus, riviMaara, sarakeMaara, ruudunSivu);
-
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         int[][] taulu = logic.getRuudukko().getTaulukko();
         if (logic.kaynnissa()) {
             for (int i = 0; i < taulu.length; i++) {
@@ -50,24 +51,21 @@ public class Pelilauta extends JPanel implements MouseListener {
                     int y = i * ruudunSivu;
                     if (taulu[i][j] != taulu[0].length * taulu.length) {
                         g.drawImage(kuvaLuokka.haePala(taulu[i][j]), x, y, this);
-
                     } else {
                         g.setColor(Color.black);
                         g.fillRect(x, y, ruudunSivu, ruudunSivu);
                     }
-                    
                 }
             }
-
         } else {
             logic.lopetaAjastus();
             g.setColor(Color.white);
             g.drawImage(kuvaLuokka.haeAlkuperainen(), 0, 0, this);
-            g.setColor(Color.black);
+            g.setColor(Color.white);
             g.setFont(new Font("SansSerif", Font.BOLD, 20));
-            g.drawString("Voitit PELIN!", 0, 50);
-            g.drawString("SIIHEN MENI VAAN " + logic.getSiirrot() + " SIIRTOA", 0, 70);
-            g.drawString("JA " + logic.aikaaKaytetty() + "s", 0, 90);
+            g.drawString("Voitit pelin!", 0, 50);
+            g.drawString("Käytit siihen " + logic.getSiirrot() + " SIIRTOA", 0, 70);
+            g.drawString("ja " + logic.aikaaKaytetty() + "s", 0, 90);
         }
     }
 

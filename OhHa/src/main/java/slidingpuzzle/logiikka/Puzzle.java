@@ -3,6 +3,9 @@ package slidingpuzzle.logiikka;
 import slidingpuzzle.gui.Pelilauta;
 import java.util.Random;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import slidingpuzzle.gui.MainGUI;
+import slidingpuzzle.gui.PeliPaneeli;
 
 /**
  *
@@ -20,13 +23,17 @@ public class Puzzle {
 //        TekstiKayttoliittyma txt = new TekstiKayttoliittyma(r);
 //        txt.kaynnista();
 //        
-        JFrame window = new JFrame("Sliding Puzzle");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Pelilauta peli = new Pelilauta();
-        window.setContentPane(peli);
-        window.pack();  
-        window.show();
-        window.setResizable(true);
+//        JFrame window = new JFrame("Sliding Puzzle");
+//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        PeliPaneeli peli = new PeliPaneeli();
+////        Pelilauta peli = new Pelilauta();
+//        window.setContentPane(peli);
+//        window.pack();  
+//        window.show();
+//        window.setResizable(true);
+        MainGUI gui = new MainGUI();
+        SwingUtilities.invokeLater(gui);
+                
     }
 
   

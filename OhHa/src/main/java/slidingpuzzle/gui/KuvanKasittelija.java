@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- *
+ * Kuvankäsittelijä skaalaa saamansa kuvan oikeaan kokoon ja jakaa sen oikean kokoisiksi paloiksi
  * @author Mikael Wide
  */
 public class KuvanKasittelija extends JPanel {
@@ -21,8 +21,17 @@ public class KuvanKasittelija extends JPanel {
     private final int sarakeMaara;
     private final int riviMaara;
     private final int ruudunKoko;
-    private ImageIcon temp;
+    private final ImageIcon temp;
 
+    /**
+     *
+     * @param source Polku käytettävälle kuvalle
+     * @param leveys Pelille asetettu leveys    
+     * @param korkeus Pelille asetettu korkeus
+     * @param riviMaara Pelin rivimäärä
+     * @param sarakeMaara Pelin sarakemäärä
+     * @param ruudunKoko Pelissä käytettävän ruudn sivun pituus
+     */
     public KuvanKasittelija(String source, int leveys, int korkeus, int riviMaara, int sarakeMaara, int ruudunKoko) {
         this.pelinKorkeus = korkeus;
         this.pelinLeveys = leveys;
@@ -36,6 +45,9 @@ public class KuvanKasittelija extends JPanel {
 
     }
 
+    /**
+     *  hajotaKuva() jakaa kuvan oikean kokoisiin paloihin ja lisää ne hashMappiin avaimena 1-n jossa n on ruudukossa olevien alkioden määrä
+     */
     public void hajotaKuva() {
         int n = 1;
         for (int i = 0; i < riviMaara; i++) {
@@ -49,16 +61,30 @@ public class KuvanKasittelija extends JPanel {
 
     }
 
+    /**
+     *  Metodin avulla voi hakea kuvapalaa
+     * 
+     * @param palaNro Joku ruudukossa oleva arvo
+     * @return  Palauttaa kuvan
+     */
     public Image haePala(int palaNro) {
         return this.palat.get(palaNro);
     }
 
+    /**
+     *  Metodi skaalaa kuvan oikean kokoiseksi riippuen minkä kokoista pelilautaa käytetään
+     */
     public void skaalaaKuva() {
         if (temp.getIconHeight() != pelinKorkeus && temp.getIconWidth() != pelinLeveys) {
             lahde = new ImageIcon(temp.getImage().getScaledInstance(pelinLeveys, pelinKorkeus, Image.SCALE_SMOOTH));
         }
     }
-    public Image haeAlkuperainen(){
+
+    /**
+     *
+     * @return Palauttaa koko alkuperäisen
+     */
+    public Image haeAlkuperainen() {
         return this.lahde.getImage();
     }
 }
